@@ -2,6 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+
+	<key>CFBundleURLTypes</key>
+    <array>
+    <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+        <string>com.googleusercontent.apps.YOUR_WEB_CLIENT_ID</string>
+        <string>com.googleusercontent.apps.$(GOOGLE_IOS_CLIENT_ID_FOR_INFO)</string>
+        </array>
+    </dict>
+    </array>
+    <key>GIDClientID</key>
+    <string>$(GOOGLE_IOS_CLIENT_ID_FOR_INFO).apps.googleusercontent.com</string>
+    <key>GIDRedirectURI</key>
+    <string>com.googleusercontent.$(GOOGLE_IOS_CLIENT_ID_FOR_INFO):/oauth2redirect/google</string>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

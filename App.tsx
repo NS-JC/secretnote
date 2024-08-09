@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import LoginPage from './screen/Camera';
+import LoginPage from './screen/GoogleLogin';
 
 export default function App() {
   return (
@@ -15,4 +15,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-//asdfasdfasdf develop branch test
