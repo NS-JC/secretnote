@@ -72,3 +72,36 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+
+# added from here
+
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Build output
+build/
+dist/
+
+# Mac system files
+.DS_Store
+
+# .env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*
+
+
+# Xcode specific files
+**/.xcode.env.local
+
+*.xcconfig
+ios/*.xcconfig
