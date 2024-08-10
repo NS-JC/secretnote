@@ -93,11 +93,19 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            //chat GPT asked me to add this two line below i don't know what it works for
+            buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", "false"
+            buildConfigField "boolean", "IS_HERMES_ENABLED", "true"
+            
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.debug
+            //chat GPT asked me to add this two line below i don't know what it works for
+            buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", "true"
+            buildConfigField "boolean", "IS_HERMES_ENABLED", "true"
+
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
