@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, Alert } from 'react-native';
 import { launchCamera, CameraOptions, ImagePickerResponse } from 'react-native-image-picker';
 
-const Camera = () => {
+const UploadMain = () => {
   const openCamera = async () => {
     const options: CameraOptions = {
       mediaType: 'photo',
@@ -50,7 +50,7 @@ const Camera = () => {
       <View style={styles.UploadTextAdditionalText}>
         <Text style={styles.additionalText}>앨범에 있는 영어문제 사진을 선택해주세요</Text>
       </View>
-      <View style={styles.MenuBarBottom}>
+      {/* <View style={styles.MenuBarBottom}>
         <TouchableOpacity style={styles.menuItem}>
           <Image source={require('../../src/Icon-1-Selected.png')} style={styles.menuIcon} />
           <Text style={styles.menuText}>Camera</Text>
@@ -67,7 +67,7 @@ const Camera = () => {
           <Image source={require('../../src/Icon-4.png')} style={styles.menuIcon} />
           <Text style={styles.menuText}>Settings</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -150,4 +150,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Camera;
+export default UploadMain;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { View, TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
@@ -7,6 +8,7 @@ import {
 	GOOGLE_ANDROID_CLIENT_ID,
 	GOOGLE_IOS_CLIENT_ID,
 } from '@env';
+
 
 GoogleSignin.configure({
 	webClientId: GOOGLE_WEB_CLIENT_ID,
@@ -21,18 +23,22 @@ const GoogleLogin = async () => {
 	return userInfo;
 };
 
-export default function App() {
+export default function LoginScreen() {
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
-	const[user, setUser] = useState('')
+	const[user, setUser] = useState('');
+	const navigation = useNavigation();
 
+	//need to modify code for user authentification
 	const handleGoogleLogin = async () => {
 		setLoading(true);
 		try {
 			const response = await GoogleLogin();
 			const { idToken, user } = response;
-			console.log(user)
-			setUser(user)
+
+			// Navigate to MainTabScreen after successful login, there is no checking procedures yet
+			navigation.replace('MainTab');
+
 			// if (idToken) {
 			// 	const resp = await authAPI.validateToken({
 			// 		token: idToken,
@@ -56,6 +62,8 @@ export default function App() {
 				<Image source={require('../src/GoogleIcon.png')} style={styles.icon} />
 				<Text style={styles.buttonText}>구글 아이디로 로그인하기</Text>
 			</TouchableOpacity>
+
+			{/* checking if logged in */}
 			{user && (
 				<>
 					<Image

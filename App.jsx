@@ -26,8 +26,7 @@ import StudyTest from './screen/StudyStackScreens/StudyTest';
 import UploadChecking from './screen/UploadStackScreens/UploadChecking';
 import UploadMain from './screen/UploadStackScreens/UploadMain';
 
-import GoogleLogin from './screen/GoogleLogin';
-
+import LoginScreen from './screen/LoginScreen';
 
 
 const Stack = createStackNavigator();
@@ -38,23 +37,11 @@ const UploadStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
-const CommunityStackScreen = () => {
+const UploadStackScreen = () => {
   return (
     <Stack.Navigator>
-      <CommunityStack.Screen name="Community" component={CommunityMain} />
-      <CommunityStack.Screen name="Writing" component={CommunityWriting} />
-    </Stack.Navigator>
-  );
-};
-
-const SettingStackScreen = () => {
-  return (
-    <Stack.Navigator>
-      <SettingStack.Screen name="CoinCenter" component={SettingCoinCenter} />
-      <SettingStack.Screen name="Invite" component={SettingInvite} />
-      <SettingStack.Screen name="Setting" component={SettingMain} />
-      <SettingStack.Screen name="MyContents" component={SettingMyContents} />
-      <SettingStack.Screen name="Profile" component={SettingProfile} />
+      <UploadStack.Screen name="Upload" component={UploadMain} />
+      <UploadStack.Screen name="Checking" component={UploadChecking} />
     </Stack.Navigator>
   );
 };
@@ -68,11 +55,23 @@ const StudyStackScreen = () => {
   );
 };
 
-const UploadStackScreen = () => {
+const CommunityStackScreen = () => {
   return (
     <Stack.Navigator>
-      <UploadStack.Screen name="Checking" component={UploadChecking} />
-      <UploadStack.Screen name="Upload" component={UploadMain} />
+      <CommunityStack.Screen name="Community" component={CommunityMain} />
+      <CommunityStack.Screen name="Writing" component={CommunityWriting} />
+    </Stack.Navigator>
+  );
+};
+
+const SettingStackScreen = () => {
+  return (
+    <Stack.Navigator>
+      <SettingStack.Screen name="Setting" component={SettingMain} />
+      <SettingStack.Screen name="Profile" component={SettingProfile} />
+      <SettingStack.Screen name="CoinCenter" component={SettingCoinCenter} />
+      <SettingStack.Screen name="Invite" component={SettingInvite} />
+      <SettingStack.Screen name="MyContents" component={SettingMyContents} />
     </Stack.Navigator>
   );
 };
@@ -92,23 +91,22 @@ const MainTabScreen = ({navigation, route}) => {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'SettingStack') {
             iconName = focused ? 'person-circle' : 'person-circle-outline';
-          } else if (route.name === 'Communitytack') {
+          } else if (route.name === 'CommunityStack') {
             iconName = focused ? 'person-circle' : 'person-circle-outline';
           }
 
           // You can return any component that you like here!
           return <Icon name={iconName} size={size} color={color} />;
         },
+        tabBarActiveTintColor: 'black',
+        tabBarInactiveTintColor: 'lightgray',
+        tabBarShowLabel: false,
       })}
-      tabBarOptions={{
-        activeTintColor: 'black',
-        inactiveTintColor: 'lightgray',
-        showLabel: false,
-      }}>
-      <Tab.Screen name="Communitytack" component={CommunityStackScreen} />
-      <Tab.Screen name="SettingStack" component={SettingStackScreen} />
-      <Tab.Screen name="StudyStack" component={StudyStackScreen} />
+    >
       <Tab.Screen name="UploadStack" component={UploadStackScreen} />
+      <Tab.Screen name="StudyStack" component={StudyStackScreen} />
+      <Tab.Screen name="CommunityStack" component={CommunityStackScreen} />
+      <Tab.Screen name="SettingStack" component={SettingStackScreen} />
     </Tab.Navigator>
   );
 };
@@ -120,7 +118,7 @@ const Auth = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="Login"
-        component={GoogleLogin}
+        component={LoginScreen}
         options={{
           title: '',
           headerBackTitleVisible: false,
