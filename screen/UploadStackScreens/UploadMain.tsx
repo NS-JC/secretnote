@@ -30,7 +30,7 @@ const Camera = () => {
       </View>
       <View style={styles.CameraIconBig}>
         <TouchableOpacity onPress={openCamera}>
-          <Image source={require('../src/Camera.png')} style={styles.iconBig} />
+          <Image source={require('../../src/Camera.png')} style={styles.iconBig} />
         </TouchableOpacity>
       </View>
       <View style={styles.TakePictureText}>
@@ -41,7 +41,7 @@ const Camera = () => {
       </View>
       <View style={styles.UploadIconBig}>
         <TouchableOpacity>
-          <Image source={require('../src/Upload.png')} style={styles.iconBig} />
+          <Image source={require('../../src/Upload.png')} style={styles.iconBig} />
         </TouchableOpacity>
       </View>
       <View style={styles.UploadText}>
@@ -52,19 +52,19 @@ const Camera = () => {
       </View>
       <View style={styles.MenuBarBottom}>
         <TouchableOpacity style={styles.menuItem}>
-          <Image source={require('../src/Icon-1-Selected.png')} style={styles.menuIcon} />
+          <Image source={require('../../src/Icon-1-Selected.png')} style={styles.menuIcon} />
           <Text style={styles.menuText}>Camera</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuItem}>
-          <Image source={require('../src/Icon-2.png')} style={styles.menuIcon} />
+          <Image source={require('../../src/Icon-2.png')} style={styles.menuIcon} />
           <Text style={styles.menuText}>History</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuItem}>
-          <Image source={require('../src/Icon-3.png')} style={styles.menuIcon} />
+          <Image source={require('../../src/Icon-3.png')} style={styles.menuIcon} />
           <Text style={styles.menuText}>Community</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuItem}>
-          <Image source={require('../src/Icon-4.png')} style={styles.menuIcon} />
+          <Image source={require('../../src/Icon-4.png')} style={styles.menuIcon} />
           <Text style={styles.menuText}>Settings</Text>
         </TouchableOpacity>
       </View>
