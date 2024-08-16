@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/dist/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { StyleSheet, View ,Image } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import {
@@ -11,22 +11,22 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
-import CommunityMain from './screen/CommunityStackScreens/CommunityMain';
-import CommunityWriting from './screen/CommunityStackScreens/CommunityWriting';
+import CommunityMain from './src/screen/CommunityStackScreens/CommunityMain';
+import CommunityWriting from './src/screen/CommunityStackScreens/CommunityWriting';
 
-import SettingCoinCenter from './screen/SettingStackScreens/SettingCoinCenter';
-import SettingInvite from './screen/SettingStackScreens/SettingInvite';
-import SettingMain from './screen/SettingStackScreens/SettingMain';
-import SettingMyContents from './screen/SettingStackScreens/SettingMyContents';
-import SettingProfile from './screen/SettingStackScreens/SettingProfile';
+import SettingCoinCenter from './src/screen/SettingStackScreens/SettingCoinCenter';
+import SettingInvite from './src/screen/SettingStackScreens/SettingInvite';
+import SettingMain from './src/screen/SettingStackScreens/SettingMain';
+import SettingMyContents from './src/screen/SettingStackScreens/SettingMyContents';
+import SettingProfile from './src/screen/SettingStackScreens/SettingProfile';
 
-import StudyMain from './screen/StudyStackScreens/StudyMain';
-import StudyTest from './screen/StudyStackScreens/StudyTest';
+import StudyMain from './src/screen/StudyStackScreens/StudyMain';
+import StudyTest from './src/screen/StudyStackScreens/StudyTest';
 
-import UploadChecking from './screen/UploadStackScreens/UploadChecking';
-import UploadMain from './screen/UploadStackScreens/UploadMain';
+import UploadChecking from './src/screen/UploadStackScreens/UploadChecking';
+import UploadMain from './src/screen/UploadStackScreens/UploadMain';
 
-import LoginScreen from './screen/LoginScreen';
+import LoginScreen from './src/screen/LoginScreen';
 
 
 const Stack = createStackNavigator();
@@ -39,7 +39,7 @@ const Tab = createBottomTabNavigator();
 
 const UploadStackScreen = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <UploadStack.Screen name="Upload" component={UploadMain} />
       <UploadStack.Screen name="Checking" component={UploadChecking} />
     </Stack.Navigator>
@@ -49,7 +49,9 @@ const UploadStackScreen = () => {
 const StudyStackScreen = () => {
   return (
     <Stack.Navigator>
-      <StudyStack.Screen name="Study" component={StudyMain} />
+      <StudyStack.Screen 
+        options={{ headerShown: false }}
+        name="Study" component={StudyMain} />
       <StudyStack.Screen name="Test" component={StudyTest} />
     </Stack.Navigator>
   );
@@ -58,7 +60,9 @@ const StudyStackScreen = () => {
 const CommunityStackScreen = () => {
   return (
     <Stack.Navigator>
-      <CommunityStack.Screen name="Community" component={CommunityMain} />
+      <CommunityStack.Screen 
+        options={{ headerShown: false }}
+        name="Community" component={CommunityMain} />
       <CommunityStack.Screen name="Writing" component={CommunityWriting} />
     </Stack.Navigator>
   );
@@ -67,7 +71,9 @@ const CommunityStackScreen = () => {
 const SettingStackScreen = () => {
   return (
     <Stack.Navigator>
-      <SettingStack.Screen name="Setting" component={SettingMain} />
+      <SettingStack.Screen
+        options={{ headerShown: false }}
+        name="Setting" component={SettingMain} />
       <SettingStack.Screen name="Profile" component={SettingProfile} />
       <SettingStack.Screen name="CoinCenter" component={SettingCoinCenter} />
       <SettingStack.Screen name="Invite" component={SettingInvite} />
@@ -82,6 +88,7 @@ const MainTabScreen = ({navigation, route}) => {
     <Tab.Navigator
       initialRouteName="UploadStack"
       screenOptions={({route}) => ({
+        headerShown: false,
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
 
@@ -96,11 +103,11 @@ const MainTabScreen = ({navigation, route}) => {
           }
 
           // You can return any component that you like here!
-          return <Icon name={iconName} size={size} color={color} />;
+          return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'lightgray',
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
       })}
     >
       <Tab.Screen name="UploadStack" component={UploadStackScreen} />

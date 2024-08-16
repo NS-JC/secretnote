@@ -2,24 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-
-	<key>CFBundleURLTypes</key>
-    <array>
-    <dict>
-        <key>CFBundleTypeRole</key>
-        <string>Editor</string>
-        <key>CFBundleURLSchemes</key>
-        <array>
-        <string>com.googleusercontent.apps.YOUR_WEB_CLIENT_ID</string>
-        <string>com.googleusercontent.apps.$(GOOGLE_IOS_CLIENT_ID_FOR_INFO)</string>
-        </array>
-    </dict>
-    </array>
-    <key>GIDClientID</key>
-    <string>$(GOOGLE_IOS_CLIENT_ID_FOR_INFO).apps.googleusercontent.com</string>
-    <key>GIDRedirectURI</key>
-    <string>com.googleusercontent.$(GOOGLE_IOS_CLIENT_ID_FOR_INFO):/oauth2redirect/google</string>
-
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -38,20 +20,41 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.YOUR_WEB_CLIENT_ID</string>
+				<string>com.googleusercontent.apps.$(GOOGLE_IOS_CLIENT_ID_FOR_INFO)</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>GIDClientID</key>
+	<string>$(GOOGLE_IOS_CLIENT_ID_FOR_INFO).apps.googleusercontent.com</string>
+	<key>GIDRedirectURI</key>
+	<string>com.googleusercontent.$(GOOGLE_IOS_CLIENT_ID_FOR_INFO):/oauth2redirect/google</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-	  <!-- Do not change NSAllowsArbitraryLoads to true, or you will risk app rejection! -->
 		<key>NSAllowsArbitraryLoads</key>
 		<false/>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) would like to use your camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) would like to access your photo gallery</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PRODUCT_NAME) would like to your photo library to save photos.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -66,11 +69,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-
-	<key>NSCameraUsageDescription</key>
-	<string>We need access to your camera to take photos.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need access to your photo library to select photos.</string>
-
 </dict>
 </plist>

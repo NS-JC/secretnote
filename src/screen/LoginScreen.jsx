@@ -59,7 +59,7 @@ export default function LoginScreen() {
 		<View style={styles.container}>
 			<Text style={styles.title}>The Secret Note</Text>
 			<TouchableOpacity style={styles.button} onPress={handleGoogleLogin}>
-				<Image source={require('../src/GoogleIcon.png')} style={styles.icon} />
+				<Image source={require('../img/GoogleIcon.png')} style={styles.icon} />
 				<Text style={styles.buttonText}>구글 아이디로 로그인하기</Text>
 			</TouchableOpacity>
 
