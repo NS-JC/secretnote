@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 import { StyleSheet, View, Text, TouchableOpacity, Image, Alert } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 
@@ -34,7 +38,6 @@ const UploadMain = () => {
       <View style={styles.CameraHead}>
         <Text style={styles.headerText}>Camera</Text>
       </View>
-
       <View style={styles.CameraIconBig}>
         <TouchableOpacity onPress={openCamera}>
           <Image source={require('../../img/Camera.png')} style={styles.iconBig} />
@@ -84,12 +87,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconBig: {
-    width: 80,
-    height: 80,
+    width: 120,
+    height: 120,
   },
   TakePictureText: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   text: {
@@ -98,7 +101,7 @@ const styles = StyleSheet.create({
   },
   TakePictureAdditionalText: {
     flex: 1,
-    justifyContent: 'center',
+    marginTop: 20,
     alignItems: 'center',
   },
   additionalText: {
@@ -112,12 +115,12 @@ const styles = StyleSheet.create({
   },
   UploadText: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   UploadTextAdditionalText: {
     flex: 1,
-    justifyContent: 'center',
+    marginTop: 20,
     alignItems: 'center',
   },
 });

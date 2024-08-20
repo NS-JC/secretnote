@@ -51,7 +51,7 @@ const StudyStackScreen = () => {
     <Stack.Navigator>
       <StudyStack.Screen 
         options={{ headerShown: false }}
-        name="Study" component={StudyMain} />
+        name="StudyStack" component={StudyMain} />
       <StudyStack.Screen name="Test" component={StudyTest} />
     </Stack.Navigator>
   );
@@ -62,7 +62,7 @@ const CommunityStackScreen = () => {
     <Stack.Navigator>
       <CommunityStack.Screen 
         options={{ headerShown: false }}
-        name="Community" component={CommunityMain} />
+        name="CommunityStack" component={CommunityMain} />
       <CommunityStack.Screen name="Writing" component={CommunityWriting} />
     </Stack.Navigator>
   );
@@ -73,7 +73,7 @@ const SettingStackScreen = () => {
     <Stack.Navigator>
       <SettingStack.Screen
         options={{ headerShown: false }}
-        name="Setting" component={SettingMain} />
+        name="SettingStack" component={SettingMain} />
       <SettingStack.Screen name="Profile" component={SettingProfile} />
       <SettingStack.Screen name="CoinCenter" component={SettingCoinCenter} />
       <SettingStack.Screen name="Invite" component={SettingInvite} />
@@ -92,14 +92,14 @@ const MainTabScreen = ({navigation, route}) => {
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
 
-          if (route.name === 'StudyStack') {
-            iconName = focused ? 'document' : 'document-outline';
-          } else if (route.name === 'UploadStack') {
-            iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'SettingStack') {
+          if (route.name === 'Study') {
+            iconName = focused ? 'book' : 'book-outline';
+          } else if (route.name === 'Camera') {
+            iconName = focused ? 'camera' : 'camera-outline';
+          } else if (route.name === 'Setting') {
             iconName = focused ? 'person-circle' : 'person-circle-outline';
-          } else if (route.name === 'CommunityStack') {
-            iconName = focused ? 'person-circle' : 'person-circle-outline';
+          } else if (route.name === 'Community') {
+            iconName = focused ? 'chatbubbles' : 'chatbubbles-outline';
           }
 
           // You can return any component that you like here!
@@ -110,10 +110,10 @@ const MainTabScreen = ({navigation, route}) => {
         tabBarShowLabel: true,
       })}
     >
-      <Tab.Screen name="UploadStack" component={UploadStackScreen} />
-      <Tab.Screen name="StudyStack" component={StudyStackScreen} />
-      <Tab.Screen name="CommunityStack" component={CommunityStackScreen} />
-      <Tab.Screen name="SettingStack" component={SettingStackScreen} />
+      <Tab.Screen name="Camera" component={UploadStackScreen} />
+      <Tab.Screen name="Study" component={StudyStackScreen} />
+      <Tab.Screen name="Community" component={CommunityStackScreen} />
+      <Tab.Screen name="Setting" component={SettingStackScreen} />
     </Tab.Navigator>
   );
 };
