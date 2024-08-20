@@ -1,30 +1,37 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { useNavigation } from '@react-navigation/native';
 
 const SettingMain = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.header}>Settings</Text>
 
       <TouchableOpacity style={styles.option}>
         <View style={styles.optionContent}>
-          <Text style={styles.optionTitle}>닉네임</Text>
-          <Text style={styles.optionSubtitle}>Email: awoefji@gmail.com</Text>
+          <Icon name="id-badge" size={wp('6%')} color="#2196F3" />
+          <Text style={styles.optionTitle}>프로필 설정</Text>
+          <Text style={styles.optionSubtitle}>Email: 이메일표시@gmail.com</Text>
         </View>
-        <Icon name="angle-right" size={24} color="#B0B0B0" />
+        <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
       </TouchableOpacity>
 
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionTitle}>COIN CENTER</Text>
       </View>
 
-      <TouchableOpacity style={styles.option}>
+      <TouchableOpacity 
+        style={styles.option} 
+        onPress={() => navigation.navigate('CoinCenter')}
+      >
         <View style={styles.optionContent}>
-          <Icon name="star" size={24} color="#FFC107" />
+          <Icon name="star" size={wp('6%')} color="#FFC107" />
           <Text style={styles.optionTitle}>코인 충전소</Text>
         </View>
-        <Icon name="angle-right" size={24} color="#B0B0B0" />
+        <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
       </TouchableOpacity>
 
       <View style={styles.sectionHeader}>
@@ -33,26 +40,26 @@ const SettingMain = () => {
 
       <TouchableOpacity style={styles.option}>
         <View style={styles.optionContent}>
-          <Icon name="whatsapp" size={24} color="#4CAF50" />
+          <Icon name="pencil" size={wp('6%')} color="#4CAF50" />
           <Text style={styles.optionTitle}>내가 쓴 글</Text>
         </View>
-        <Icon name="angle-right" size={24} color="#B0B0B0" />
+        <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.option}>
         <View style={styles.optionContent}>
-          <Icon name="bell" size={24} color="#FF5722" />
+          <Icon name="bell" size={wp('6%')} color="#FF5722" />
           <Text style={styles.optionTitle}>알림설정</Text>
         </View>
-        <Icon name="angle-right" size={24} color="#B0B0B0" />
+        <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.option}>
         <View style={styles.optionContent}>
-          <Icon name="heart" size={24} color="#E91E63" />
+          <Icon name="heart" size={wp('6%')} color="#E91E63" />
           <Text style={styles.optionTitle}>초대하기</Text>
         </View>
-        <Icon name="angle-right" size={24} color="#B0B0B0" />
+        <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
       </TouchableOpacity>
 
       <View style={styles.sectionHeader}>
@@ -61,26 +68,26 @@ const SettingMain = () => {
 
       <TouchableOpacity style={styles.option}>
         <View style={styles.optionContent}>
-          <Icon name="info-circle" size={24} color="#2196F3" />
+          <Icon name="info-circle" size={wp('6%')} color="#2196F3" />
           <Text style={styles.optionTitle}>2024.07.07</Text>
         </View>
-        <Icon name="angle-right" size={24} color="#B0B0B0" />
+        <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.option}>
         <View style={styles.optionContent}>
-          <Icon name="info-circle" size={24} color="#2196F3" />
+          <Icon name="info-circle" size={wp('6%')} color="#2196F3" />
           <Text style={styles.optionTitle}>2024.07.06</Text>
         </View>
-        <Icon name="angle-right" size={24} color="#B0B0B0" />
+        <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.option}>
         <View style={styles.optionContent}>
-          <Icon name="info-circle" size={24} color="#2196F3" />
+          <Icon name="info-circle" size={wp('6%')} color="#2196F3" />
           <Text style={styles.optionTitle}>2024.07.05</Text>
         </View>
-        <Icon name="angle-right" size={24} color="#B0B0B0" />
+        <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
       </TouchableOpacity>
     </ScrollView>
   );
@@ -91,29 +98,31 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   header: {
-    fontSize: 24,
+    fontSize: wp('6%'),
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: hp('2%'),
     textAlign: 'center',
   },
   sectionHeader: {
-    marginTop: 20,
-    marginBottom: 10,
-    paddingHorizontal: 20,
+    marginTop: hp('2%'),
+    marginBottom: hp('1%'),
+    paddingHorizontal: wp('5%'),
   },
   sectionTitle: {
-    fontSize: 14,
+    fontSize: wp('3.5%'),
     color: '#808080',
     fontWeight: 'bold',
   },
   option: {
     backgroundColor: '#FFFFFF',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingVertical: hp('2%'),
+    paddingHorizontal: wp('5%'),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderBottomWidth: 1,
+    borderTopWidth: 0.5,
+    borderTopColor: '#E0E0E0',
+    borderBottomWidth: 0.5,
     borderBottomColor: '#E0E0E0',
     flex: 1,
   },
@@ -122,12 +131,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   optionTitle: {
-    fontSize: 16,
-    marginLeft: 10,
+    fontSize: wp('4%'),
+    marginLeft: wp('2.5%'),
     color: '#333333',
   },
   optionSubtitle: {
-    fontSize: 14,
+    fontSize: wp('3.5%'),
     color: '#808080',
   },
 });

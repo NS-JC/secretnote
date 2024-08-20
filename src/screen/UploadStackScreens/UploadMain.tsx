@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerText: {
-    fontSize: 24,
+    fontSize: wp('6%'), // Responsive font size
     fontWeight: 'bold',
   },
   CameraIconBig: {
@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconBig: {
-    width: 120,
-    height: 120,
+    width: wp('30%'), // Responsive width
+    height: wp('30%'), // Responsive height (keep it square)
   },
   TakePictureText: {
     flex: 1,
@@ -96,16 +96,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 18,
+    fontSize: wp('4.5%'), // Responsive font size
     fontWeight: 'bold',
   },
   TakePictureAdditionalText: {
     flex: 1,
-    marginTop: 20,
+    marginTop: hp('2%'), // Responsive margin
     alignItems: 'center',
   },
   additionalText: {
-    fontSize: 14,
+    fontSize: wp('3.5%'), // Responsive font size
     color: '#888888',
   },
   UploadIconBig: {
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   UploadTextAdditionalText: {
     flex: 1,
-    marginTop: 20,
+    marginTop: hp('2%'), // Responsive margin
     alignItems: 'center',
   },
 });
