@@ -8,8 +8,6 @@ const SettingMain = () => {
   const navigation = useNavigation();
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.header}>Settings</Text>
-
       <TouchableOpacity style={styles.option}>
         <View style={styles.optionContent}>
           <Icon name="id-badge" size={wp('6%')} color="#2196F3" />
@@ -96,12 +94,6 @@ const SettingMain = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F5F5F5',
-  },
-  header: {
-    fontSize: wp('6%'),
-    fontWeight: 'bold',
-    marginBottom: hp('2%'),
-    textAlign: 'center',
   },
   sectionHeader: {
     marginTop: hp('2%'),

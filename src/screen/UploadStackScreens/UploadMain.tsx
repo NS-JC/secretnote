@@ -35,9 +35,6 @@ const UploadMain = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.CameraHead}>
-        <Text style={styles.headerText}>Camera</Text>
-      </View>
       <View style={styles.CameraIconBig}>
         <TouchableOpacity onPress={openCamera}>
           <Image source={require('../../img/Camera.png')} style={styles.iconBig} />
@@ -72,17 +69,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff',
   },
-  CameraHead: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  headerText: {
-    fontSize: wp('6%'), // Responsive font size
-    fontWeight: 'bold',
-  },
   CameraIconBig: {
     flex: 1,
+    marginTop: hp('8%'),
     justifyContent: 'center',
     alignItems: 'center',
   },

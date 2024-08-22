@@ -4,7 +4,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { StyleSheet, View ,Image } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { StyleSheet, Text, View ,Image, TouchableOpacity } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import {
   heightPercentageToDP as hp,
@@ -40,7 +41,21 @@ const Tab = createBottomTabNavigator();
 const UploadStackScreen = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <UploadStack.Screen name="Upload" component={UploadMain} />
+      <UploadStack.Screen
+        name="Upload"
+        component={UploadMain}
+        options={({ navigation }) => ({
+          headerShown: true,
+          headerTitleAlign: 'center',
+          title: 'Upload', // Set the title for the header
+          headerTitleStyle: {
+            fontSize: hp('3%'), // Adjust the size as needed, using a responsive unit
+          },
+          headerStyle: {
+            height: hp('10%'), // Adjust the height as needed, using a responsive unit
+          },
+        })}
+      />
       <UploadStack.Screen name="Checking" component={UploadChecking} />
     </Stack.Navigator>
   );
@@ -61,9 +76,65 @@ const CommunityStackScreen = () => {
   return (
     <Stack.Navigator>
       <CommunityStack.Screen 
-        options={{ headerShown: false }}
-        name="CommunityStack" component={CommunityMain} />
-      <CommunityStack.Screen name="Writing" component={CommunityWriting} />
+        name="CommunityStack" 
+        component={CommunityMain}
+        options={({ navigation }) => ({
+          headerShown: true,
+          headerTitleAlign: 'center',
+          title: 'Community', // Set the title for the header
+          headerTitleStyle: {
+            fontSize: hp('3%'), // Adjust the size as needed, using a responsive unit
+          },
+          headerStyle: {
+            height: hp('10%'), // Adjust the height as needed, using a responsive unit
+          },
+          headerRight: () => (
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('Writing')}
+              style={{ marginRight: wp('4%') }} // Responsive margin using width percentage
+            >
+              <Icon name="pencil-square-o" size={hp('4%')} color="#007AFF" />
+            </TouchableOpacity>
+          ),
+        })}
+      />
+      <CommunityStack.Screen 
+        name="Writing" 
+        component={CommunityWriting} 
+        options={({ navigation }) => ({
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <TouchableOpacity 
+              onPress={() => navigation.goBack()} 
+              style={{ 
+                marginLeft: wp('4%'), 
+                flexDirection: 'row', 
+                alignItems: 'center' 
+              }}
+            >
+              <Ionicons name="chevron-back" size={wp('6%')} color="#007AFF" /> 
+              <Text 
+                style={{ 
+                  color: '#007AFF', 
+                  fontSize: wp('4.5%'),
+                  alignSelf: 'center'
+                }}
+              >
+                뒤로
+              </Text>
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity onPress={() => {/* Logic for posting the writing */}} style={{ marginRight: wp('4%') }}>
+              <Text style={{ color: '#007AFF', fontSize: wp('4.5%') }}>글 올리기</Text>
+            </TouchableOpacity>
+          ),
+          headerTitle: "Writing",
+          headerTitleStyle: {
+            fontSize: hp('3%'),
+          }
+        })}
+      />
     </Stack.Navigator>
   );
 };
@@ -72,8 +143,20 @@ const SettingStackScreen = () => {
   return (
     <Stack.Navigator>
       <SettingStack.Screen
-        options={{ headerShown: false }}
-        name="SettingStack" component={SettingMain} />
+        name="SettingStack" 
+        component={SettingMain}
+        options={({ navigation }) => ({
+          headerShown: true,
+          headerTitleAlign: 'center',
+          title: 'Settings', // Set the title for the header
+          headerTitleStyle: {
+            fontSize: hp('3%'), // Adjust the size as needed, using a responsive unit
+          },
+          headerStyle: {
+            height: hp('10%'), // Adjust the height as needed, using a responsive unit
+          },
+        })} 
+      />
       <SettingStack.Screen name="Profile" component={SettingProfile} />
       <SettingStack.Screen name="CoinCenter" component={SettingCoinCenter} />
       <SettingStack.Screen name="Invite" component={SettingInvite} />
@@ -96,7 +179,7 @@ const MainTabScreen = ({navigation, route}) => {
             iconName = focused ? 'book' : 'book-outline';
           } else if (route.name === 'Camera') {
             iconName = focused ? 'camera' : 'camera-outline';
-          } else if (route.name === 'Setting') {
+          } else if (route.name === 'Settings') {
             iconName = focused ? 'person-circle' : 'person-circle-outline';
           } else if (route.name === 'Community') {
             iconName = focused ? 'chatbubbles' : 'chatbubbles-outline';
@@ -113,7 +196,7 @@ const MainTabScreen = ({navigation, route}) => {
       <Tab.Screen name="Camera" component={UploadStackScreen} />
       <Tab.Screen name="Study" component={StudyStackScreen} />
       <Tab.Screen name="Community" component={CommunityStackScreen} />
-      <Tab.Screen name="Setting" component={SettingStackScreen} />
+      <Tab.Screen name="Settings" component={SettingStackScreen} />
     </Tab.Navigator>
   );
 };
