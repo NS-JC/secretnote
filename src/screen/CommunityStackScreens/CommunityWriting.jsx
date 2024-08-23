@@ -11,22 +11,32 @@ const CommunityWriting = ({ navigation }) => {
   const titleInputRef = useRef(null); // Create a ref for the title input
   const { addNotice } = useContext(NoticesContext);
 
-  useEffect(() => {
-    // Focus on the title input field when the component is mounted
-    if (titleInputRef.current) {
-      titleInputRef.current.focus();
-    }
-  }, []);
-
   const handlePost = () => {
-    if (title && content) {
-      // Perform your posting logic here, such as updating state or sending data to your backend
+    if (title.trim() && content.trim()) {
+      addNotice(title, content);
       Alert.alert('Post Success', 'Your post has been submitted!');
       navigation.goBack();
     } else {
       Alert.alert('Please fill in both the title and content.');
     }
   };
+
+  useEffect(() => {
+    if (titleInputRef.current) {
+      titleInputRef.current.focus();
+    }
+    // Set headerRight button inside CommunityWriting
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity 
+          onPress={handlePost}
+          style={{ marginRight: wp('4%') }}
+        >
+          <Text style={{ color: '#007AFF', fontSize: wp('4.5%') }}>글 올리기</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, title, content]);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -50,9 +60,6 @@ const CommunityWriting = ({ navigation }) => {
         onChangeText={setContent}
         multiline
       />
-      <TouchableOpacity onPress={handlePost} style={styles.postButton}>
-        <Text style={styles.postButtonText}>글 올리기</Text>
-      </TouchableOpacity>
     </ScrollView>
   );
 };

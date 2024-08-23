@@ -104,30 +104,7 @@ const CommunityStackScreen = () => {
       <CommunityStack.Screen 
         name="Writing" 
         component={CommunityWriting}
-        options={({ navigation }) => ({
-          headerTitleAlign: 'center',
-          headerLeft: () => (
-            <TouchableOpacity 
-              onPress={() => navigation.goBack()} 
-              style={{ marginLeft: wp('4%'), flexDirection: 'row', alignItems: 'center' }}
-            >
-              <Ionicons name="chevron-back" size={wp('6%')} color="#007AFF" /> 
-              <Text style={{ color: '#007AFF', fontSize: wp('4.5%'), alignSelf: 'center' }}>뒤로</Text>
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <TouchableOpacity 
-              onPress={() => navigation.navigate('Writing', { handlePost: true })}  // Directly trigger the function or a flag
-              style={{ marginRight: wp('4%') }}
-            >
-              <Text style={{ color: '#007AFF', fontSize: wp('4.5%') }}>글 올리기</Text>
-            </TouchableOpacity>
-          ),
-          headerTitle: "Writing",
-          headerTitleStyle: {
-            fontSize: hp('3%'),
-          }
-        })}
+        options={{ headerTitleAlign: 'center' }}
       />
 
       <CommunityStack.Screen 
