@@ -10,6 +10,7 @@ const CommunityWriting = ({ navigation }) => {
   const [content, setContent] = useState('');
   const titleInputRef = useRef(null); // Create a ref for the title input
   const { addNotice } = useContext(NoticesContext);
+  const [isFirstMount, setIsFirstMount] = useState(true);
 
   const handlePost = () => {
     if (title.trim() && content.trim()) {
@@ -22,9 +23,11 @@ const CommunityWriting = ({ navigation }) => {
   };
 
   useEffect(() => {
-    if (titleInputRef.current) {
+    if (isFirstMount && titleInputRef.current) {
       titleInputRef.current.focus();
+      setIsFirstMount(false); // Prevent focus from happening again
     }
+    
     // Set headerRight button inside CommunityWriting
     navigation.setOptions({
       headerRight: () => (
