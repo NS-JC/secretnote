@@ -1,12 +1,15 @@
-import React, { useState, useEffect, useRef  } from 'react';
-import { View, TextInput, TouchableOpacity, Text, ScrollView, StyleSheet } from 'react-native';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { View, TextInput, TouchableOpacity, Text, ScrollView, StyleSheet, Alert } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { NoticesContext } from '../../context/NoticesContext';
+import { useNavigation } from '@react-navigation/native';
 
 const CommunityWriting = ({ navigation }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const titleInputRef = useRef(null); // Create a ref for the title input
+  const { addNotice } = useContext(NoticesContext);
 
   useEffect(() => {
     // Focus on the title input field when the component is mounted
@@ -14,6 +17,16 @@ const CommunityWriting = ({ navigation }) => {
       titleInputRef.current.focus();
     }
   }, []);
+
+  const handlePost = () => {
+    if (title && content) {
+      // Perform your posting logic here, such as updating state or sending data to your backend
+      Alert.alert('Post Success', 'Your post has been submitted!');
+      navigation.goBack();
+    } else {
+      Alert.alert('Please fill in both the title and content.');
+    }
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -37,6 +50,9 @@ const CommunityWriting = ({ navigation }) => {
         onChangeText={setContent}
         multiline
       />
+      <TouchableOpacity onPress={handlePost} style={styles.postButton}>
+        <Text style={styles.postButtonText}>글 올리기</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };

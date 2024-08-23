@@ -5,7 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { StyleSheet, Text, View ,Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import {
   heightPercentageToDP as hp,
@@ -14,6 +14,7 @@ import {
 
 import CommunityMain from './src/screen/CommunityStackScreens/CommunityMain';
 import CommunityWriting from './src/screen/CommunityStackScreens/CommunityWriting';
+import CommunityComment from './src/screen/CommunityStackScreens/CommunityComment';
 
 import SettingCoinCenter from './src/screen/SettingStackScreens/SettingCoinCenter';
 import SettingInvite from './src/screen/SettingStackScreens/SettingInvite';
@@ -28,6 +29,8 @@ import UploadChecking from './src/screen/UploadStackScreens/UploadChecking';
 import UploadMain from './src/screen/UploadStackScreens/UploadMain';
 
 import LoginScreen from './src/screen/LoginScreen';
+
+import { NoticesProvider } from './src/context/NoticesContext';
 
 
 const Stack = createStackNavigator();
@@ -100,7 +103,36 @@ const CommunityStackScreen = () => {
       />
       <CommunityStack.Screen 
         name="Writing" 
-        component={CommunityWriting} 
+        component={CommunityWriting}
+        options={({ navigation }) => ({
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <TouchableOpacity 
+              onPress={() => navigation.goBack()} 
+              style={{ marginLeft: wp('4%'), flexDirection: 'row', alignItems: 'center' }}
+            >
+              <Ionicons name="chevron-back" size={wp('6%')} color="#007AFF" /> 
+              <Text style={{ color: '#007AFF', fontSize: wp('4.5%'), alignSelf: 'center' }}>뒤로</Text>
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('Writing', { handlePost: true })}  // Directly trigger the function or a flag
+              style={{ marginRight: wp('4%') }}
+            >
+              <Text style={{ color: '#007AFF', fontSize: wp('4.5%') }}>글 올리기</Text>
+            </TouchableOpacity>
+          ),
+          headerTitle: "Writing",
+          headerTitleStyle: {
+            fontSize: hp('3%'),
+          }
+        })}
+      />
+
+      <CommunityStack.Screen 
+        name="Comment" 
+        component={CommunityComment} 
         options={({ navigation }) => ({
           headerTitleAlign: 'center',
           headerLeft: () => (
@@ -124,15 +156,8 @@ const CommunityStackScreen = () => {
               </Text>
             </TouchableOpacity>
           ),
-          headerRight: () => (
-            <TouchableOpacity onPress={() => {/* Logic for posting the writing */}} style={{ marginRight: wp('4%') }}>
-              <Text style={{ color: '#007AFF', fontSize: wp('4.5%') }}>글 올리기</Text>
-            </TouchableOpacity>
-          ),
-          headerTitle: "Writing",
-          headerTitleStyle: {
-            fontSize: hp('3%'),
-          }
+
+
         })}
       />
     </Stack.Navigator>
@@ -221,32 +246,34 @@ const Auth = () => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Auth">
-        {/* if you want to use splash screen then activate below and add splach screen
-        <Stack.Screen
-          name="SplashScreen"
-          component={SplashScreen}
-          options={{headerShown: false}}
-        /> */}
-        {/* Auth Navigator: Include Login and Signup */}
-        <Stack.Screen
-          name="Auth"
-          component={Auth}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="MainTab"
-          // i have no idea what this is below
-          // options={({route}) => ({
-          //   headerTitle: getHeaderTitle(route),
-          // })}
-          component={MainTabScreen}
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator>
-      <FlashMessage position="bottom" />
-    </NavigationContainer>
+    <NoticesProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Auth">
+          {/* if you want to use splash screen then activate below and add splach screen
+          <Stack.Screen
+            name="SplashScreen"
+            component={SplashScreen}
+            options={{headerShown: false}}
+          /> */}
+          {/* Auth Navigator: Include Login and Signup */}
+          <Stack.Screen
+            name="Auth"
+            component={Auth}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="MainTab"
+            // i have no idea what this is below
+            // options={({route}) => ({
+            //   headerTitle: getHeaderTitle(route),
+            // })}
+            component={MainTabScreen}
+            options={{headerShown: false}}
+          />
+        </Stack.Navigator>
+        <FlashMessage position="bottom" />
+      </NavigationContainer>
+    </NoticesProvider>
   );
 };
 

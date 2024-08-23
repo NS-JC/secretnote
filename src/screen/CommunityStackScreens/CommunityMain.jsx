@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { NoticesContext } from '../../context/NoticesContext';
 
 const CommunityMain = ({ navigation }) => {
-  const [notices, setNotices] = useState([
-    { id: '1', title: 'Fetch Title', content: 'Fetch Content', date: 'Fetch Date' },
-    { id: '2', title: 'New Policy Update', content: 'Check the new policy update.', date: '7/29/19' },
-    { id: '3', title: 'Holiday Announcement', content: 'We will have a holiday on Friday.', date: '7/29/19' },
-  ]);
+  const { notices } = useContext(NoticesContext);
 
   const renderNotice = ({ item }) => (
-    <TouchableOpacity style={styles.noticeItem}>
+    <TouchableOpacity 
+      style={styles.noticeItem}
+      onPress={() => navigation.navigate('Comment', { 
+        title: item.title, 
+        content: item.content, 
+        date: item.date 
+      })}
+    >
       <View style={styles.textContainer}>
         <Text style={styles.noticeTitle}>{item.title}</Text>
         <Text style={styles.noticeContent}>{item.content}</Text>
