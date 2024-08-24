@@ -28,6 +28,20 @@ const CommunityWriting = ({ navigation }) => {
       setIsFirstMount(false); // Prevent focus from happening again
     }
     
+    // Hide the BottomTabNavigator when the screen is focused
+    const hideTabBar = navigation.addListener('focus', () => {
+      navigation.getParent()?.setOptions({ 
+        tabBarStyle: { display: 'none' } 
+      });
+    });
+
+    // Restore the BottomTabNavigator when the screen is blurred (not focused)
+    const showTabBar = navigation.addListener('blur', () => {
+      navigation.getParent()?.setOptions({ 
+        tabBarStyle: { display: 'flex' } 
+      });
+    });
+
     // Set headerRight button inside CommunityWriting
     navigation.setOptions({
       headerRight: () => (
@@ -39,7 +53,25 @@ const CommunityWriting = ({ navigation }) => {
         </TouchableOpacity>
       ),
     });
+
+    // Clean up the listeners when the component unmounts
+    return () => {
+      hideTabBar();
+      showTabBar();
+    };
   }, [navigation, title, content]);
+  //   // Set headerRight button inside CommunityWriting
+  //   navigation.setOptions({
+  //     headerRight: () => (
+  //       <TouchableOpacity 
+  //         onPress={handlePost}
+  //         style={{ marginRight: wp('4%') }}
+  //       >
+  //         <Text style={{ color: '#007AFF', fontSize: wp('4.5%') }}>글 올리기</Text>
+  //       </TouchableOpacity>
+  //     ),
+  //   });
+  // }, [navigation, title, content]);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>

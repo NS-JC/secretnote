@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, TextInput, ScrollView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -36,6 +36,28 @@ const CommunityComment = ({ route, navigation }) => {
     </View>
   );
 
+  useEffect(() => {
+    // Hide the BottomTabNavigator when the screen is focused
+    const hideTabBar = navigation.addListener('focus', () => {
+      navigation.getParent()?.setOptions({ 
+        tabBarStyle: { display: 'none' } 
+      });
+    });
+
+    // Restore the BottomTabNavigator when the screen is blurred (not focused)
+    const showTabBar = navigation.addListener('blur', () => {
+      navigation.getParent()?.setOptions({ 
+        tabBarStyle: { display: 'flex' } 
+      });
+    });
+
+    // Clean up the listeners when the component unmounts
+    return () => {
+      hideTabBar();
+      showTabBar();
+    };
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
 
@@ -66,7 +88,7 @@ const CommunityComment = ({ route, navigation }) => {
           <FontAwesome6 
             name="circle-arrow-up" 
             size={wp('8%')}  // Adjust the size as needed
-            color="#000"  // Use white color for the icon
+            color="#007AFF"  // Use white color for the icon
           />
         </TouchableOpacity>
       </View>
