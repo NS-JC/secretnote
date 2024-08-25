@@ -25,8 +25,8 @@ import SettingProfile from './src/screen/SettingStackScreens/SettingProfile';
 import StudyMain from './src/screen/StudyStackScreens/StudyMain';
 import StudyTest from './src/screen/StudyStackScreens/StudyTest';
 
-import UploadChecking from './src/screen/UploadStackScreens/UploadChecking';
 import UploadMain from './src/screen/UploadStackScreens/UploadMain';
+import UploadChecking from './src/screen/UploadStackScreens/UploadChecking';
 
 import LoginScreen from './src/screen/LoginScreen';
 

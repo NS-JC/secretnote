@@ -5,19 +5,23 @@ import {
 } from 'react-native-responsive-screen';
 import { StyleSheet, View, Text, TouchableOpacity, Image, Alert } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
+import { useNavigation } from '@react-navigation/native';
 
 const UploadMain = () => {
+  const navigation = useNavigation();
+
   const openCamera = () => {
     ImagePicker.openCamera({
       width: 300,
       height: 400,
       cropping: true,
-    }).then(image => {
-      console.log(image);
-      // Handle the image data here (e.g., upload or display)
-    }).catch(error => {
-      console.log(error);
-    });
+    })
+      .then(image => {
+        navigation.navigate('Checking', { image });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   const openLibrary = () => {
@@ -25,12 +29,13 @@ const UploadMain = () => {
       width: 300,
       height: 400,
       cropping: true,
-    }).then(image => {
-      console.log(image);
-      // Handle the image data here (e.g., upload or display)
-    }).catch(error => {
-      console.log(error);
-    });
+    })
+      .then(image => {
+        navigation.navigate('Checking', { image });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   return (
