@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const StudyTest = ({ route }) => {
+const StudyTest = ({ route, navigation }) => {
   const { title, content } = route.params || { title: '', content: '' };
+
+  useEffect(() => {
+    // Hide the bottom tab bar when this screen is active
+    navigation.getParent()?.setOptions({
+      tabBarStyle: { display: 'none' }
+    });
+
+    // Show the tab bar again when leaving this screen
+    return () => {
+      navigation.getParent()?.setOptions({
+        tabBarStyle: undefined
+      });
+    };
+  }, [navigation]);
 
   return (
     <View style={styles.container}>

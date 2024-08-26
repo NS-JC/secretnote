@@ -70,9 +70,33 @@ const StudyStackScreen = () => {
     <StudyProvider>
       <Stack.Navigator>
         <Stack.Screen 
-          options={{ headerShown: false }}
-          name="StudyStack" component={StudyMain} />
-        <Stack.Screen name="Test" component={StudyTest} />
+          name="StudyStack" 
+          component={StudyMain}
+          options={({ navigation }) => ({
+            headerShown: true,
+            headerTitleAlign: 'center',
+            title: 'Questions', // Set the title for the header
+            headerTitleStyle: {
+              fontSize: hp('3%'), // Adjust the size as needed, using a responsive unit
+            },
+            headerStyle: {
+              height: hp('10%'), // Adjust the height as needed, using a responsive unit
+            },
+          })}  />
+        <Stack.Screen 
+          name="Test" 
+          component={StudyTest}
+          options={({ navigation }) => ({
+            headerTitleAlign: 'center',
+            title: 'Review',
+            headerTitleStyle: {
+              fontSize: hp('3%'), // Adjust the size as needed, using a responsive unit
+            },
+            headerStyle: {
+              height: hp('10%'), // Adjust the height as needed, using a responsive unit
+            },
+          })}
+        />
       </Stack.Navigator>
     </StudyProvider>
   );

@@ -29,9 +29,9 @@ const StudyMain = ({ navigation }) => {
   return (
     <View style={styles.container}>
 
-      <TouchableOpacity style={styles.reviewButton} onPress={() => navigation.navigate('Test')}>
-        <Icon name="book" size={wp('5%')} color="#007AFF" style={styles.reviewIcon} />
-        <Text style={styles.reviewText}>오답노트 전체 복습하기</Text>
+      <TouchableOpacity style={styles.reviewAllButton} onPress={() => navigation.navigate('Test')}>
+        <Icon name="book" size={wp('5%')} color="#007AFF" style={styles.reviewAllIcon} />
+        <Text style={styles.reviewAllText}>오답노트 전체 복습하기</Text>
       </TouchableOpacity>
 
       <FlatList
@@ -46,16 +46,13 @@ const StudyMain = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff' },
-  header: { flexDirection: 'row', justifyContent: 'space-between', padding: wp('4%'), backgroundColor: '#F5F5F5' },
-  headerTitle: { fontSize: wp('5%'), fontWeight: 'bold' },
-  headerOption: { fontSize: wp('4%'), color: '#007AFF' },
-  reviewButton: { flexDirection: 'row', alignItems: 'center', padding: wp('4%') },
-  reviewIcon: { width: wp('5%'), height: wp('5%'), marginRight: wp('2%') },
-  reviewText: { fontSize: wp('4%'), color: '#007AFF' },
-  noteItem: { padding: wp('4%'), borderBottomWidth: 1, borderBottomColor: '#E0E0E0' },
+  reviewAllButton: { flexDirection: 'row', alignItems: 'center', padding: wp('4%') },
+  reviewAllIcon: { width: wp('5%'), height: wp('5%'), marginRight: wp('2%') },
+  reviewAllText: { fontSize: wp('4%'), color: '#007AFF' },
+  noteItem: { paddingVertical: hp('2%'), paddingHorizontal: wp('4%'), borderBottomWidth: 1, borderBottomColor: '#E0E0E0' },
   noteDate: { fontSize: wp('4%'), color: '#888' },
-  noteTitle: { fontSize: wp('4.5%'), fontWeight: 'bold', marginTop: wp('2%') },
-  noteContent: { fontSize: wp('4%'), color: '#555', marginTop: wp('1%') },
+  noteTitle: { fontSize: wp('4.5%'), fontWeight: 'bold', color: '#333', marginTop: wp('1%') },
+  noteContent: { fontSize: wp('4%'), color: '#555', marginTop: wp('0.5%') },
   listContainer: { paddingBottom: wp('10%') },
 });
 
