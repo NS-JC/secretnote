@@ -15,6 +15,7 @@ const UploadMain = () => {
       width: 300,
       height: 400,
       cropping: true,
+      freeStyleCropEnabled: true,
     })
       .then(image => {
         navigation.navigate('Checking', { image });
@@ -29,6 +30,7 @@ const UploadMain = () => {
       width: 300,
       height: 400,
       cropping: true,
+      freeStyleCropEnabled: true,
     })
       .then(image => {
         navigation.navigate('Checking', { image });
