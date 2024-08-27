@@ -57,7 +57,7 @@ export default function LoginScreen() {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>The Secret Note</Text>
+			<Image source={require('../img/Logo.png')} style={styles.logo} resizeMode="contain" />
 			<TouchableOpacity style={styles.button} onPress={handleGoogleLogin}>
 				<Image source={require('../img/GoogleIcon.png')} style={styles.icon} />
 				<Text style={styles.buttonText}>구글 아이디로 로그인하기</Text>
@@ -81,26 +81,23 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'flex-end',
-		alignItems: 'center',
-		backgroundColor: '#f0f0f5',
-		paddingBottom: hp('15%'),  // 15% of the screen height
-		position: 'relative',
+		justifyContent: 'center', // Center vertically
+		alignItems: 'center', // Center horizontally
+		backgroundColor: '#fff',
 	},
-	title: {
-		fontSize: wp('8%'),  // Font size based on 8% of the screen width
-		fontWeight: 'bold',
-		position: 'absolute',
-		top: hp('40%'),  // 40% from the top of the screen height
-		textAlign: 'center',
-		width: '100%',
+	logo: {
+		width: wp('60%'), // 60% of the screen width
+		height: undefined, // Allows height to be proportional to the aspect ratio
+		aspectRatio: 1626 / 1002, // Maintains the aspect ratio of the logo
 	},
 	button: {
+		position: 'absolute',
+		bottom: hp('10%'),
 		flexDirection: 'row',
 		alignItems: 'center',
 		backgroundColor: '#fff',
-		paddingVertical: hp('1.5%'),  // Padding vertical based on 1.5% of the screen height
-		paddingHorizontal: wp('7%'),  // Padding horizontal based on 7% of the screen width
+		paddingVertical: hp('1.5%'),
+		paddingHorizontal: wp('10%'),
 		borderRadius: 5,
 		borderWidth: 1,
 		borderColor: '#ccc',
