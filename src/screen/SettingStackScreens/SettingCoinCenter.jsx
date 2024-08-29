@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const SettingCoinCenter = () => {
   return (
@@ -12,6 +13,7 @@ const SettingCoinCenter = () => {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>CHARGING COIN</Text>
         <TouchableOpacity style={styles.row}>
+          <Icon name="coins" size={wp('7%')} color="#FFC300" style={styles.icon} />
           <Text style={styles.coinText}>10 COIN</Text>
           <Text style={styles.priceText}>1000 원</Text>
         </TouchableOpacity>
@@ -76,8 +78,8 @@ const styles = StyleSheet.create({
     borderBottomColor: '#e0e0e0',
   },
   sectionTitle: {
-    fontSize: wp('4%'),
-    color: '#555',
+    fontSize: wp('3.5%'),
+    color: '#808080',
     marginBottom: hp('1%'),
     paddingHorizontal: wp('5%'),
   },
@@ -94,6 +96,9 @@ const styles = StyleSheet.create({
   },
   coinText: {
     fontSize: wp('4.5%'),
+    marginTop: hp('0.5%'),
+    marginBottom: hp('0.5%'),
+    color: '#000',
   },
   priceText: {
     fontSize: wp('4.5%'),

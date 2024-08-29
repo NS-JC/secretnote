@@ -193,7 +193,6 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: wp('3.5%'),
     color: '#808080',
-    fontWeight: 'bold',
   },
   option: {
     backgroundColor: '#FFFFFF',
