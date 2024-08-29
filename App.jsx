@@ -21,6 +21,8 @@ import SettingInvite from './src/screen/SettingStackScreens/SettingInvite';
 import SettingMain from './src/screen/SettingStackScreens/SettingMain';
 import SettingMyContents from './src/screen/SettingStackScreens/SettingMyContents';
 import SettingProfile from './src/screen/SettingStackScreens/SettingProfile';
+import SettingNotification from './src/screen/SettingStackScreens/SettingNotification';
+import SettingCoupon from './src/screen/SettingStackScreens/SettingCoupon';
 
 import StudyMain from './src/screen/StudyStackScreens/StudyMain';
 import StudyTest from './src/screen/StudyStackScreens/StudyTest';
@@ -191,8 +193,10 @@ const SettingStackScreen = () => {
       />
       <SettingStack.Screen name="Profile" component={SettingProfile} />
       <SettingStack.Screen name="CoinCenter" component={SettingCoinCenter} />
-      <SettingStack.Screen name="Invite" component={SettingInvite} />
+      <SettingStack.Screen name="Coupon" component={SettingCoupon} />
       <SettingStack.Screen name="MyContents" component={SettingMyContents} />
+      <SettingStack.Screen name="Notification" component={SettingNotification} />
+      <SettingStack.Screen name="Invite" component={SettingInvite} />
     </Stack.Navigator>
   );
 };
