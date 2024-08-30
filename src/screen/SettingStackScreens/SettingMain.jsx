@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from 'rea
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { useNavigation } from '@react-navigation/native';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const SettingMain = () => {
   const navigation = useNavigation();
@@ -16,6 +17,16 @@ const SettingMain = () => {
     email: 'awoefij@gmail.com'
   };
 
+  // Logout function
+  const handleLogout = async () => {
+    try {
+      await GoogleSignin.signOut(); // Google Sign-Out
+      navigation.replace('Auth'); // Navigate to the Login screen
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.profileSection}>
@@ -108,7 +119,7 @@ const SettingMain = () => {
 
       <TouchableOpacity 
         style={styles.logoutButton}
-        onPress={() => console.log('Logout')} // Placeholder for logout functionality
+        onPress={handleLogout} // Logout functionality here
       >
         <Text style={styles.logoutText}>로그아웃</Text>
       </TouchableOpacity>

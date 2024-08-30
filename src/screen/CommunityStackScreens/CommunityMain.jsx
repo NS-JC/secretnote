@@ -13,14 +13,23 @@ const CommunityMain = ({ navigation }) => {
       onPress={() => navigation.navigate('Comment', { 
         title: item.title, 
         content: item.content, 
-        date: item.date 
+        date: item.date,
+        userProfilePicture: item.userProfilePicture, // Pass the profile picture to the Comment screen 
       })}
     >
+      <Image source={item.profilePicture} style={styles.profilePicture} />
+
       <View style={styles.textContainer}>
-        <Text style={styles.noticeTitle}>{item.title}</Text>
-        <Text style={styles.noticeContent}>{item.content}</Text>
-      </View>
-      <Text style={styles.noticeDate}>{item.date}</Text>
+      <Text style={styles.noticeTitle} numberOfLines={1} ellipsizeMode="tail">
+        {item.title}
+      </Text>
+      <Text style={styles.noticeContent} numberOfLines={1} ellipsizeMode="tail">
+        {item.content}
+      </Text>
+    </View>
+    <Text style={styles.noticeDate} numberOfLines={1} ellipsizeMode="tail">
+      {item.date}
+    </Text>
     </TouchableOpacity>
   );
 
@@ -48,6 +57,12 @@ const styles = StyleSheet.create({
     paddingVertical: hp('2%'),
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+  },
+  profilePicture: {
+    width: wp('10%'),
+    height: wp('10%'),
+    borderRadius: wp('5%'),
+    marginRight: wp('5%'),
   },
   textContainer: {
     flex: 1,
