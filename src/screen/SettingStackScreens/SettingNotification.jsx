@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Switch, StyleSheet, Alert } from 'react-native';
+import { View, Text, Switch, StyleSheet, ScrollView, SafeAreaView, Alert } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const SettingNotification = () => {
@@ -29,55 +29,59 @@ const SettingNotification = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>복습 알림</Text>
-        <View style={styles.row}>
-          <Text style={styles.text}>1주 단위 복습 푸시 알림</Text>
-          <Switch
-            trackColor={{ false: '#767577', true: '#34C759' }}
-            thumbColor={isStudyNotificationEnabled ? '#fff' : '#f4f3f4'}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleStudyNotification}
-            value={isStudyNotificationEnabled}
-          />
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>복습 알림</Text>
+          <View style={styles.row}>
+            <Text style={styles.text}>1주 단위 복습 푸시 알림</Text>
+            <Switch
+              trackColor={{ false: '#767577', true: '#34C759' }}
+              thumbColor={isStudyNotificationEnabled ? '#fff' : '#f4f3f4'}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleStudyNotification}
+              value={isStudyNotificationEnabled}
+            />
+          </View>
+          <Text style={styles.subtext}>오늘 공부했던 것을 1주일 후에도 기억하는지 확인하세요!</Text>
         </View>
-        <Text style={styles.subtext}>오늘 공부했던 것을 1주일 후에도 기억하는지 확인하세요!</Text>
-      </View>
 
-      <View style={styles.adSpace}>
-        <Text style={styles.adText}>광고자리</Text>
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>커뮤니티 알림</Text>
-        <View style={styles.row}>
-          <Text style={styles.text}>커뮤니티 댓글 푸시 알림</Text>
-          <Switch
-            trackColor={{ false: '#767577', true: '#34C759' }}
-            thumbColor={isCommentNotificationEnabled ? '#fff' : '#f4f3f4'}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleCommentNotification}
-            value={isCommentNotificationEnabled}
-          />
+        <View style={styles.adSpace}>
+          <Text style={styles.adText}>광고자리</Text>
         </View>
-        <Text style={styles.subtext}>내가 쓴 글에 친구들이 남긴 댓글을 확인하세요!</Text>
-      </View>
-    </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>커뮤니티 알림</Text>
+          <View style={styles.row}>
+            <Text style={styles.text}>커뮤니티 댓글 푸시 알림</Text>
+            <Switch
+              trackColor={{ false: '#767577', true: '#34C759' }}
+              thumbColor={isCommentNotificationEnabled ? '#fff' : '#f4f3f4'}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleCommentNotification}
+              value={isCommentNotificationEnabled}
+            />
+          </View>
+          <Text style={styles.subtext}>내가 쓴 글에 친구들이 남긴 댓글을 확인하세요!</Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f8f8f8',
+  },
+  scrollViewContent: {
     paddingTop: hp('3%'),
-    paddingHorizontal: 0, // No padding on the horizontal edges
+    paddingBottom: hp('10%'), // Extra padding to prevent the bottom content from being hidden
   },
   section: {
     marginBottom: hp('2.5%'),
   },
-  
   sectionTitle: {
     fontSize: wp('3.5%'),
     color: '#808080',

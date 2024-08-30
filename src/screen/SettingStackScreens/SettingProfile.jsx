@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
+  ScrollView,
+  SafeAreaView,
   KeyboardAvoidingView,
   Platform,
   Alert,
@@ -50,75 +52,77 @@ const SettingProfile = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
-    >
-      <TouchableOpacity onPress={selectProfilePicture} style={styles.imageContainer}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <TouchableOpacity onPress={selectProfilePicture} style={styles.imageContainer}>
         {profilePicture ? (
           <Image source={{ uri: profilePicture }} style={styles.profileImage} />
         ) : (
           <View style={styles.emptyProfileImage} />
         )}
-      </TouchableOpacity>
-
-      <View style={styles.profileEditContainer}>
-        <TouchableOpacity onPress={selectProfilePicture}>
-          <Text style={styles.profileLabel}>프로필 사진 수정</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={selectProfilePicture}>
-          <Icon name="pencil" size={wp('4%')} color="#007AFF" style={styles.pencilIcon} />
-        </TouchableOpacity>
-      </View>
 
-      <View style={styles.inputContainer}>
-        <Text>닉네임</Text>
-        <View style={styles.inputRow}>
+        <View style={styles.profileEditContainer}>
+          <TouchableOpacity onPress={selectProfilePicture}>
+            <Text style={styles.profileLabel}>프로필 사진 수정</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={selectProfilePicture}>
+            <Icon name="pencil" size={wp('4%')} color="#007AFF" style={styles.pencilIcon} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Text>닉네임</Text>
+          <View style={styles.inputRow}>
+            <TextInput
+              style={styles.input}
+              value={nickname}
+              onChangeText={setNickname}
+              placeholder="닉네임을 입력하세요"
+              placeholderTextColor="#B0B0B0"
+            />
+            <Icon name="pencil" size={wp('4%')} color="#007AFF" />
+          </View>
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Text>등급</Text>
           <TextInput
             style={styles.input}
-            value={nickname}
-            onChangeText={setNickname}
-            placeholder="닉네임을 입력하세요"
+            value={rank}
+            editable={false}
+            placeholder="등급이 표시됩니다"
             placeholderTextColor="#B0B0B0"
           />
-          <Icon name="pencil" size={wp('4%')} color="#007AFF" />
         </View>
-      </View>
 
-      <View style={styles.inputContainer}>
-        <Text>등급</Text>
-        <TextInput
-          style={styles.input}
-          value={rank}
-          editable={false}
-          placeholder="등급이 표시됩니다"
-          placeholderTextColor="#B0B0B0"
-        />
-      </View>
+        <View style={styles.inputContainer}>
+          <Text>이메일</Text>
+          <TextInput
+            style={styles.input}
+            value={email}
+            editable={false}
+            placeholder="이메일이 표시됩니다"
+            placeholderTextColor="#B0B0B0"
+          />
+        </View>
 
-      <View style={styles.inputContainer}>
-        <Text>이메일</Text>
-        <TextInput
-          style={styles.input}
-          value={email}
-          editable={false}
-          placeholder="이메일이 표시됩니다"
-          placeholderTextColor="#B0B0B0"
-        />
-      </View>
-
-      <TouchableOpacity onPress={saveChanges} style={styles.saveButton}>
-        <Text style={styles.saveButtonText}>변경사항 저장</Text>
-      </TouchableOpacity>
-    </KeyboardAvoidingView>
+        <TouchableOpacity onPress={saveChanges} style={styles.saveButton}>
+          <Text style={styles.saveButtonText}>변경사항 저장</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: wp('5%'),
     backgroundColor: '#fff',
+  },
+  scrollViewContent: {
+    padding: wp('5%'),
+    paddingBottom: hp('10%'), // Extra padding to prevent the save button from being hidden
   },
   imageContainer: {
     alignItems: 'center',

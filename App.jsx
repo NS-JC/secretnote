@@ -20,6 +20,7 @@ import SettingCoinCenter from './src/screen/SettingStackScreens/SettingCoinCente
 import SettingInvite from './src/screen/SettingStackScreens/SettingInvite';
 import SettingMain from './src/screen/SettingStackScreens/SettingMain';
 import SettingMyContents from './src/screen/SettingStackScreens/SettingMyContents';
+import SettingReadMyContents from './src/screen/SettingStackScreens/SettingReadMyContents';
 import SettingProfile from './src/screen/SettingStackScreens/SettingProfile';
 import SettingNotification from './src/screen/SettingStackScreens/SettingNotification';
 import SettingCoupon from './src/screen/SettingStackScreens/SettingCoupon';
@@ -143,29 +144,27 @@ const CommunityStackScreen = () => {
           component={CommunityComment} 
           options={({ navigation }) => ({
             headerTitleAlign: 'center',
-            headerLeft: () => (
-              <TouchableOpacity 
-                onPress={() => navigation.goBack()} 
-                style={{ 
-                  marginLeft: wp('4%'), 
-                  flexDirection: 'row', 
-                  alignItems: 'center' 
-                }}
-              >
-                <Ionicons name="chevron-back" size={wp('6%')} color="#007AFF" /> 
-                <Text 
-                  style={{ 
-                    color: '#007AFF', 
-                    fontSize: wp('4.5%'),
-                    alignSelf: 'center'
-                  }}
-                >
-                  뒤로
-                </Text>
-              </TouchableOpacity>
-            ),
-
-
+            // headerLeft: () => (
+            //   <TouchableOpacity 
+            //     onPress={() => navigation.goBack()} 
+            //     style={{ 
+            //       marginLeft: wp('4%'), 
+            //       flexDirection: 'row', 
+            //       alignItems: 'center' 
+            //     }}
+            //   >
+            //     <Ionicons name="chevron-back" size={wp('6%')} color="#007AFF" /> 
+            //     <Text 
+            //       style={{ 
+            //         color: '#007AFF', 
+            //         fontSize: wp('4.5%'),
+            //         alignSelf: 'center'
+            //       }}
+            //     >
+            //       뒤로
+            //     </Text>
+            //   </TouchableOpacity>
+            // ),
           })}
         />
       </Stack.Navigator>
@@ -175,29 +174,32 @@ const CommunityStackScreen = () => {
 
 const SettingStackScreen = () => {
   return (
-    <Stack.Navigator>
-      <SettingStack.Screen
-        name="SettingStack" 
-        component={SettingMain}
-        options={({ navigation }) => ({
-          headerShown: true,
-          headerTitleAlign: 'center',
-          title: 'Settings', // Set the title for the header
-          headerTitleStyle: {
-            fontSize: hp('3%'), // Adjust the size as needed, using a responsive unit
-          },
-          headerStyle: {
-            height: hp('10%'), // Adjust the height as needed, using a responsive unit
-          },
-        })} 
-      />
-      <SettingStack.Screen name="Profile" component={SettingProfile} />
-      <SettingStack.Screen name="CoinCenter" component={SettingCoinCenter} />
-      <SettingStack.Screen name="Coupon" component={SettingCoupon} />
-      <SettingStack.Screen name="MyContents" component={SettingMyContents} />
-      <SettingStack.Screen name="Notification" component={SettingNotification} />
-      <SettingStack.Screen name="Invite" component={SettingInvite} />
-    </Stack.Navigator>
+    <NoticesProvider>
+      <Stack.Navigator>
+        <SettingStack.Screen
+          name="SettingStack" 
+          component={SettingMain}
+          options={({ navigation }) => ({
+            headerShown: true,
+            headerTitleAlign: 'center',
+            title: 'Settings', // Set the title for the header
+            headerTitleStyle: {
+              fontSize: hp('3%'), // Adjust the size as needed, using a responsive unit
+            },
+            headerStyle: {
+              height: hp('10%'), // Adjust the height as needed, using a responsive unit
+            },
+          })} 
+        />
+        <SettingStack.Screen name="Profile" component={SettingProfile} />
+        <SettingStack.Screen name="CoinCenter" component={SettingCoinCenter} />
+        <SettingStack.Screen name="Coupon" component={SettingCoupon} />
+        <SettingStack.Screen name="MyContents" component={SettingMyContents} />
+        <SettingStack.Screen name="ReadMyContents" component={SettingReadMyContents} />
+        <SettingStack.Screen name="Notification" component={SettingNotification} />
+        <SettingStack.Screen name="Invite" component={SettingInvite} />
+      </Stack.Navigator>
+    </NoticesProvider>
   );
 };
 

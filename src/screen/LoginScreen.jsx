@@ -58,10 +58,12 @@ export default function LoginScreen() {
 	return (
 		<View style={styles.container}>
 			<Image source={require('../img/Logo.png')} style={styles.logo} resizeMode="contain" />
-			<TouchableOpacity style={styles.button} onPress={handleGoogleLogin}>
-				<Image source={require('../img/GoogleIcon.png')} style={styles.icon} />
-				<Text style={styles.buttonText}>구글 아이디로 로그인하기</Text>
-			</TouchableOpacity>
+			<View style={styles.buttonWrapper}>
+				<TouchableOpacity style={styles.button} onPress={handleGoogleLogin}>
+					<Image source={require('../img/GoogleIcon.png')} style={styles.icon} />
+					<Text style={styles.buttonText}>구글 아이디로 로그인하기</Text>
+				</TouchableOpacity>
+			</View>
 
 			{/* checking if logged in */}
 			{user && (
@@ -83,16 +85,23 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center', // Center vertically
 		alignItems: 'center', // Center horizontally
+		paddingHorizontal: wp('5%'),
 		backgroundColor: '#fff',
 	},
 	logo: {
 		width: wp('60%'), // 60% of the screen width
 		height: undefined, // Allows height to be proportional to the aspect ratio
 		aspectRatio: 1626 / 1002, // Maintains the aspect ratio of the logo
+		marginBottom: hp('5%'),
+	},
+	buttonWrapper: {
+		position: 'absolute',
+		bottom: hp('5%'), // Position the button at the bottom with some padding
+		alignItems: 'center',
+		width: '100%', // Ensure the button is centered horizontally
 	},
 	button: {
-		position: 'absolute',
-		bottom: hp('10%'),
+		// marginTop: hp('2%'),
 		flexDirection: 'row',
 		alignItems: 'center',
 		backgroundColor: '#fff',

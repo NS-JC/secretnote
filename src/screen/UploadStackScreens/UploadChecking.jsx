@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: wp('5%'),
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#fff',
   },
   uploadedImage: {
     width: wp('100%'), // Adjusted to ensure everything fits on one screen
