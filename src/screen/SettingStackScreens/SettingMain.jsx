@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { useNavigation } from '@react-navigation/native';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
@@ -62,7 +63,7 @@ const SettingMain = () => {
         onPress={() => navigation.navigate('CoinCenter')}
       >
         <View style={styles.optionContent}>
-          <Icon name="star" size={wp('6%')} color="#FFC107" />
+          <FontAwesome5 name="store" size={wp('6%')} color="#FFC107" />
           <Text style={styles.optionTitle}>코인 충전소</Text>
           <Text style={styles.optionSubtitle}>보유코인: {profileData.currentCoin} 개</Text>
         </View>
@@ -74,7 +75,7 @@ const SettingMain = () => {
         onPress={() => navigation.navigate('Coupon')}
       >
         <View style={styles.optionContent}>
-          <Icon name="ticket" size={wp('6%')} color="#FFC107" />
+          <Icon name="ticket" size={wp('6%')} color="#E0E0E0" />
           <Text style={styles.optionTitle}>쿠폰함</Text>
         </View>
         <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
@@ -89,7 +90,7 @@ const SettingMain = () => {
         onPress={() => navigation.navigate('MyContents')}
       >
         <View style={styles.optionContent}>
-          <Icon name="pencil" size={wp('6%')} color="#4CAF50" />
+          <Icon name="pencil" size={wp('6%')} color="#E0E0E0" />
           <Text style={styles.optionTitle}>내가 쓴 글</Text>
         </View>
         <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
@@ -100,7 +101,7 @@ const SettingMain = () => {
         onPress={() => navigation.navigate('Notification')}
       >
         <View style={styles.optionContent}>
-          <Icon name="bell" size={wp('6%')} color="#FF5722" />
+          <Icon name="bell" size={wp('6%')} color="#E0E0E0" />
           <Text style={styles.optionTitle}>알림설정</Text>
         </View>
         <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
@@ -111,7 +112,7 @@ const SettingMain = () => {
         onPress={() => navigation.navigate('Invite')}
       >
         <View style={styles.optionContent}>
-          <Icon name="heart" size={wp('6%')} color="#E91E63" />
+          <Icon name="heart" size={wp('6%')} color="#E0E0E0" />
           <Text style={styles.optionTitle}>초대하기</Text>
         </View>
         <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />

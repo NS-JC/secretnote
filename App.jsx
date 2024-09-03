@@ -236,7 +236,7 @@ const MainTabScreen = ({navigation, route}) => {
             iconName = 'circle-plus';
             IconComponent = FontAwesome6;
             return (
-              <IconComponent name={iconName} size={size} color="#007AFF" />
+              <IconComponent name={iconName} size={size * 1.4} color="#007AFF" />
             );
           } else if (route.name === 'Settings') {
             iconName = focused ? 'person-circle' : 'person-circle-outline';
