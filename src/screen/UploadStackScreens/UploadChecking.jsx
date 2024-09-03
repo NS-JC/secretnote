@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const UploadChecking = () => {
   const navigation = useNavigation();
@@ -38,6 +39,7 @@ const UploadChecking = () => {
       <Text style={styles.additionalText}>위 문제와 유사한 문제를 만듭니다</Text>
 
       <TouchableOpacity style={styles.confirmButton} onPress={() => {}}>
+        <Icon name="fire" size={wp('6%')} color="#ffffff" alignItems="center" /> 
         <Text style={styles.confirmButtonText}>문제 만들기</Text>
       </TouchableOpacity>
 
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
     marginBottom: hp('2%'),
   },
   text: {
-    fontSize: hp('2.5%'),
+    fontSize: hp('2%'),
     fontWeight: 'bold',
     marginBottom: hp('1%'),
     textAlign: 'center',
@@ -74,10 +76,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   confirmButton: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#007aff',
     paddingVertical: hp('2%'),
     width: wp('80%'),
-    alignItems: 'center',
+    flexDirection: 'row',
+    
+    justifyContent: 'center',
     borderRadius: 20,
     marginBottom: hp('2%'),
     borderWidth: 1,
@@ -85,10 +89,12 @@ const styles = StyleSheet.create({
   },
   confirmButtonText: {
     fontSize: hp('2%'),
-    color: '#007aff',
+    color: '#ffffff',
+    alignItems: 'center',
+    fontWeight: 'bold',
   },
   cancelButton: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#F5F5F5',
     paddingVertical: hp('2%'),
     width: wp('80%'),
     alignItems: 'center',
@@ -99,6 +105,7 @@ const styles = StyleSheet.create({
   cancelButtonText: {
     fontSize: hp('2%'),
     color: '#f66',
+    fontWeight: 'bold',
   },
 });
 

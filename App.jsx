@@ -5,12 +5,15 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
+
+import HomeMain from './src/screen/HomeStackScreens/HomeMain';
 
 import CommunityMain from './src/screen/CommunityStackScreens/CommunityMain';
 import CommunityWriting from './src/screen/CommunityStackScreens/CommunityWriting';
@@ -45,11 +48,25 @@ const UploadStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
+const HomeStackScreen = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen
+        name="HomeStack"
+        component={HomeMain}
+        options={({ navigation }) => ({
+          headerShown: false,
+        })}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const UploadStackScreen = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <UploadStack.Screen
-        name="Upload"
+        name="UploadStack"
         component={UploadMain}
         options={({ navigation }) => ({
           headerShown: true,
@@ -72,7 +89,7 @@ const StudyStackScreen = () => {
   return (
     <StudyProvider>
       <Stack.Navigator>
-        <Stack.Screen 
+        <StudyStack.Screen 
           name="StudyStack" 
           component={StudyMain}
           options={({ navigation }) => ({
@@ -86,7 +103,7 @@ const StudyStackScreen = () => {
               height: hp('10%'), // Adjust the height as needed, using a responsive unit
             },
           })}  />
-        <Stack.Screen 
+        <StudyStack.Screen 
           name="Test" 
           component={StudyTest}
           options={({ navigation }) => ({
@@ -207,7 +224,7 @@ const SettingStackScreen = () => {
 const MainTabScreen = ({navigation, route}) => {
   return (
     <Tab.Navigator
-      initialRouteName="UploadStack"
+      initialRouteName="Camera"
       screenOptions={({route}) => ({
         headerShown: false,
         tabBarIcon: ({focused, color, size}) => {
@@ -216,11 +233,17 @@ const MainTabScreen = ({navigation, route}) => {
           if (route.name === 'Study') {
             iconName = focused ? 'book' : 'book-outline';
           } else if (route.name === 'Camera') {
-            iconName = focused ? 'camera' : 'camera-outline';
+            iconName = 'circle-plus';
+            IconComponent = FontAwesome6;
+            return (
+              <IconComponent name={iconName} size={size} color="#007AFF" />
+            );
           } else if (route.name === 'Settings') {
             iconName = focused ? 'person-circle' : 'person-circle-outline';
           } else if (route.name === 'Community') {
             iconName = focused ? 'chatbubbles' : 'chatbubbles-outline';
+          } else if (route.name === 'Home') {
+            iconName = focused ? 'home' : 'home-outline';
           }
 
           // You can return any component that you like here!
@@ -228,13 +251,15 @@ const MainTabScreen = ({navigation, route}) => {
         },
         tabBarActiveTintColor: '#007AFF',
         tabBarInactiveTintColor: 'lightgray',
-        tabBarShowLabel: true,
+        tabBarShowLabel: false,
       })}
     >
-      <Tab.Screen name="Camera" component={UploadStackScreen} />
-      <Tab.Screen name="Study" component={StudyStackScreen} />
-      <Tab.Screen name="Community" component={CommunityStackScreen} />
-      <Tab.Screen name="Settings" component={SettingStackScreen} />
+      <Tab.Screen name="Home" component={HomeStackScreen} options={{ unmountOnBlur: true }} />
+      <Tab.Screen name="Study" component={StudyStackScreen} options={{ unmountOnBlur: true }} />
+      <Tab.Screen name="Camera" component={UploadStackScreen} options={{ unmountOnBlur: true }} />
+      <Tab.Screen name="Community" component={CommunityStackScreen} options={{ unmountOnBlur: true }} />
+      {/* <Tab.Screen name="Store" component={StoreStackScreen} /> */}
+      <Tab.Screen name="Settings" component={SettingStackScreen} options={{ unmountOnBlur: true }} />
     </Tab.Navigator>
   );
 };

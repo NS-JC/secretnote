@@ -10,7 +10,7 @@ const CommunityMain = ({ navigation }) => {
   const renderNotice = ({ item }) => (
     <TouchableOpacity 
       style={styles.noticeItem}
-      onPress={() => navigation.navigate('Comment', { 
+      onPress={() => navigation.navigate('ReadMyContents', { 
         title: item.title, 
         content: item.content, 
         date: item.date,
