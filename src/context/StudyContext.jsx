@@ -11,6 +11,14 @@ export const StudyProvider = ({ children }) => {
     { id: '5', title: '문제', content: 'ccc', date: '2024/07/05' },
   ]);
 
+  const [bookmarks, setBookmarks] = useState([]);
+
+  const toggleBookmark = (id) => {
+    setBookmarks((prevBookmarks) => 
+      prevBookmarks.includes(id) ? prevBookmarks.filter(b => b !== id) : [...prevBookmarks, id]
+    );
+  };
+
   const addStudy = (title, content) => {
     const newStudy = {
       id: (studies.length + 1).toString(),
@@ -22,7 +30,7 @@ export const StudyProvider = ({ children }) => {
   };
 
   return (
-    <StudyContext.Provider value={{ studyNotes, addStudy }}>
+    <StudyContext.Provider value={{ studyNotes, addStudy, bookmarks, toggleBookmark }}>
       {children}
     </StudyContext.Provider>
   );

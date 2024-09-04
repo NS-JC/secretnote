@@ -13,7 +13,8 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
-import HomeMain from './src/screen/HomeStackScreens/HomeMain';
+import StoreMain from './src/screen/StoreStackScreens/StoreMain';
+import StoreCoinCenter from './src/screen/StoreStackScreens/StoreMain';
 
 import CommunityMain from './src/screen/CommunityStackScreens/CommunityMain';
 import CommunityWriting from './src/screen/CommunityStackScreens/CommunityWriting';
@@ -48,16 +49,25 @@ const UploadStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
-const HomeStackScreen = () => {
+const StoreStackScreen = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
-        name="HomeStack"
-        component={HomeMain}
+        name="StoreStack"
+        component={StoreMain}
         options={({ navigation }) => ({
-          headerShown: false,
+          headerShown: true,
+          headerTitleAlign: 'center',
+          title: 'Store', // Set the title for the header
+          headerTitleStyle: {
+            fontSize: hp('3%'), // Adjust the size as needed, using a responsive unit
+          },
+          headerStyle: {
+            height: hp('10%'), // Adjust the height as needed, using a responsive unit
+          },
         })}
       />
+      <SettingStack.Screen name="CoinCenter" component={StoreCoinCenter} />
     </Stack.Navigator>
   );
 };
@@ -161,27 +171,6 @@ const CommunityStackScreen = () => {
           component={CommunityComment} 
           options={({ navigation }) => ({
             headerTitleAlign: 'center',
-            // headerLeft: () => (
-            //   <TouchableOpacity 
-            //     onPress={() => navigation.goBack()} 
-            //     style={{ 
-            //       marginLeft: wp('4%'), 
-            //       flexDirection: 'row', 
-            //       alignItems: 'center' 
-            //     }}
-            //   >
-            //     <Ionicons name="chevron-back" size={wp('6%')} color="#007AFF" /> 
-            //     <Text 
-            //       style={{ 
-            //         color: '#007AFF', 
-            //         fontSize: wp('4.5%'),
-            //         alignSelf: 'center'
-            //       }}
-            //     >
-            //       뒤로
-            //     </Text>
-            //   </TouchableOpacity>
-            // ),
           })}
         />
       </Stack.Navigator>
@@ -236,14 +225,14 @@ const MainTabScreen = ({navigation, route}) => {
             iconName = 'circle-plus';
             IconComponent = FontAwesome6;
             return (
-              <IconComponent name={iconName} size={size * 1.4} color="#007AFF" />
+              <IconComponent name={iconName} size={hp('4.5%')} color="#007AFF" />
             );
           } else if (route.name === 'Settings') {
-            iconName = focused ? 'person-circle' : 'person-circle-outline';
+            iconName = focused ? 'person' : 'person-outline';
           } else if (route.name === 'Community') {
             iconName = focused ? 'chatbubbles' : 'chatbubbles-outline';
-          } else if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home-outline';
+          } else if (route.name === 'Store') {
+            iconName = focused ? 'storefront' : 'storefront-outline';
           }
 
           // You can return any component that you like here!
@@ -252,13 +241,16 @@ const MainTabScreen = ({navigation, route}) => {
         tabBarActiveTintColor: '#007AFF',
         tabBarInactiveTintColor: 'lightgray',
         tabBarShowLabel: false,
+        // tabBarStyle: {
+        //   paddingHorizontal: wp('3%'),
+        //   height: hp('8%'),
+        // }, 이거 넣고싶은데 이렇게 하면 다른 창에 들어갔다가 뒤로가기 눌러서 나왔을 때 반영이 안된상태로 보임 그래서 일단 뺌
       })}
     >
-      <Tab.Screen name="Home" component={HomeStackScreen} options={{ unmountOnBlur: true }} />
       <Tab.Screen name="Study" component={StudyStackScreen} options={{ unmountOnBlur: true }} />
-      <Tab.Screen name="Camera" component={UploadStackScreen} options={{ unmountOnBlur: true }} />
       <Tab.Screen name="Community" component={CommunityStackScreen} options={{ unmountOnBlur: true }} />
-      {/* <Tab.Screen name="Store" component={StoreStackScreen} /> */}
+      <Tab.Screen name="Camera" component={UploadStackScreen} options={{ unmountOnBlur: true }} />
+      <Tab.Screen name="Store" component={StoreStackScreen} options={{ unmountOnBlur: true }} />
       <Tab.Screen name="Settings" component={SettingStackScreen} options={{ unmountOnBlur: true }} />
     </Tab.Navigator>
   );
