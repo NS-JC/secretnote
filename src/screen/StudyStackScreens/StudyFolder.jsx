@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StudyContext } from '../../context/StudyContext';
 
-const StudyMain = ({ navigation }) => {
+const StudyFolder = ({ navigation }) => {
   const { studyNotes, toggleBookmark, bookmarks } = useContext(StudyContext);
 
   const [selectedFolder, setSelectedFolder] = useState(null);
@@ -40,42 +40,12 @@ const StudyMain = ({ navigation }) => {
     );
   };
 
-  const renderFolder = (folderName, isAddFolder) => {
-    return (
-      <TouchableOpacity
-        style={styles.folder}
-        onPress={() => isAddFolder ? null : setSelectedFolder(folderName)}
-      >
-        <View style={isAddFolder ? styles.addFolderBox : styles.folderBox}>
-          <Icon name={isAddFolder ? "plus" : "folder"} size={wp('6%')} color="#E0E0E0" />
-        </View>
-        <Text style={styles.folderText}>{folderName}</Text>
-      </TouchableOpacity>
-    );
-  };
-
-  const renderFolderSection = () => (
-    <View style={styles.folderContainer}>
-      {renderFolder('폴더1', false)}
-      {renderFolder('폴더 만들기', true)}
-      {/* Additional folders can be added here */}
-    </View>
-  );
-
   return (
     <View style={styles.container}>
-
-      <TouchableOpacity style={styles.reviewAllButton} onPress={() => navigation.navigate('Test')}>
-        <Icon name="book" size={wp('5%')} color="#007AFF" style={styles.reviewAllIcon} />
-        <Text style={styles.reviewAllText}>오답노트 전체 복습하기</Text>
-      </TouchableOpacity>
-
       <FlatList
         data={studyNotes}
         renderItem={renderNote}
         keyExtractor={item => item.id}
-        ListHeaderComponent={renderFolderSection}  // Renders the folder section at the top
-        contentContainerStyle={styles.listContainer}
       />
     </View>
   );
@@ -83,14 +53,6 @@ const StudyMain = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff' },
-  reviewAllButton: { flexDirection: 'row', alignItems: 'center', padding: wp('4%') },
-  reviewAllIcon: { width: wp('5%'), height: wp('5%'), marginRight: wp('2%') },
-  reviewAllText: { fontSize: wp('4%'), color: '#007AFF' },
-  folderContainer: { flexDirection: 'row', justifyContent: 'space-around', marginVertical: hp('2%') },
-  folder: { alignItems: 'center' },
-  folderBox: { width: wp('15%'), height: wp('15%'), borderWidth: 1, borderColor: '#E0E0E0', justifyContent: 'center', alignItems: 'center' },
-  addFolderBox: { width: wp('15%'), height: wp('15%'), borderWidth: 1, borderColor: '#E0E0E0', justifyContent: 'center', alignItems: 'center', borderStyle: 'dashed' },
-  folderText: { marginTop: wp('1%'), fontSize: wp('4%'), color: '#333' },
   noteItem: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp('2%'), paddingHorizontal: wp('4%'), borderBottomWidth: 1, borderBottomColor: '#E0E0E0' },
   noteTextContainer: { flex: 1, marginRight: wp('4%') },
   noteDate: { fontSize: wp('4%'), color: '#888', paddingHorizontal: wp('4%'), paddingVertical: hp('1%') },
@@ -101,4 +63,4 @@ const styles = StyleSheet.create({
   bookmarkButton: {padding: wp('2.5%') }, // 클릭 가능한 영역 확장
 });
 
-export default StudyMain;
+export default StudyFolder;

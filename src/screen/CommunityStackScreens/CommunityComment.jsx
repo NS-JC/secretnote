@@ -3,13 +3,13 @@ import { View, Text, TouchableOpacity, FlatList, StyleSheet, TextInput, Image , 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
-import GoogleIcon from '../../img/GoogleIcon.png'
+import profile_default from '../../img/profile_default.png'
 
 const CommunityComment = ({ route, navigation }) => {
   const { title, content, date } = route.params;
   const [comments, setComments] = useState([
-    { id: '1', profilePicture: GoogleIcon, userId: 'User1', commentContent: 'This is a comment', date: '9/24/19' },
-    { id: '2', profilePicture: GoogleIcon, userId: 'User2', commentContent: 'Another comment', date: '9/24/19' },
+    { id: '1', profilePicture: profile_default, userId: 'User1', commentContent: 'This is a comment', date: '9/24/19' },
+    { id: '2', profilePicture: profile_default, userId: 'User2', commentContent: 'Another comment', date: '9/24/19' },
   ]);
 
   const [newComment, setNewComment] = useState('');
@@ -21,7 +21,7 @@ const CommunityComment = ({ route, navigation }) => {
         userId: 'CurrentUser',
         commentContent: newComment,
         date: new Date().toLocaleDateString(),
-        userProfilePicture: GoogleIcon, // Assign the profile picture for the new comment
+        userProfilePicture: profile_default, // Assign the profile picture for the new comment
       };
       setComments([...comments, newCommentData]);
       setNewComment('');

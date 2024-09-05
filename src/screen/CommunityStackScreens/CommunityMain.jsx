@@ -18,12 +18,14 @@ const CommunityMain = ({ navigation }) => {
         title: item.title, 
         content: item.content, 
         date: item.date,
-        userProfilePicture: item.userProfilePicture, // Pass the profile picture to the Comment screen 
+        userProfilePicture: item.userProfilePicture, 
       })}
     >
-      <Image source={item.profilePicture} style={styles.profilePicture} />
-      <View style={styles.textContainer}>
+      <View style={styles.profileContainer}>
+        <Image source={item.profilePicture} style={styles.profilePicture} />
         <Text style={styles.userId}>{item.userId}</Text>
+      </View>
+      <View style={styles.textContainer}>
         <Text style={styles.noticeTitle} numberOfLines={1} ellipsizeMode="tail">
           {item.title}
         </Text>
@@ -76,34 +78,41 @@ const CommunityMain = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: wp('5%'),
     backgroundColor: '#f8f9fa',
   },
   boardSelector: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginVertical: hp('2%'),
   },
   boardButton: {
-    paddingVertical: hp('1%'),
-    paddingHorizontal: wp('3%'),
-    borderRadius: wp('2%'),
-    borderWidth: 1,
-    borderColor: '#333',
+    width: wp('33%'), 
+    height: wp('10%'),
+    justifyContent: 'center', 
+    alignItems: 'center',
   },
   selectedBoardButton: {
-    backgroundColor: '#eee',
+    backgroundColor: '#fff',
   },
   boardButtonText: {
     fontSize: wp('4%'),
     color: '#333',
   },
   noticeItem: {
-    flexDirection: 'row',
+    marginVertical: 2,
+    flexDirection: 'column',
     alignItems: 'flex-start',
-    paddingVertical: hp('2%'),
-    borderBottomWidth: 1,
+    paddingVertical: hp('1.5%'),
+    borderTopWidth: 0.1,
+    borderTopolor: '#ccc',
+    borderBottomWidth: 0.5,
     borderBottomColor: '#ccc',
+    backgroundColor: '#fff',
+  },
+  profileContainer: {
+    paddingLeft: wp('4%'),
+    flexDirection: 'row',
+    alignItems: 'center', // Ensures the profile picture and user ID are vertically aligned
+    marginBottom: hp('1%'),
   },
   profilePicture: {
     width: wp('8%'),
@@ -113,16 +122,17 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
+    paddingLeft: wp('5%'),
   },
   userId: {
     fontSize: wp('4%'),
     color: '#333',
-    marginBottom: hp('0.5%'),
   },
   noticeTitle: {
     fontSize: wp('4.5%'),
     fontWeight: 'bold',
     color: '#333',
+    marginTop: hp('0.5%'),
     marginBottom: hp('0.5%'),
   },
   noticeContent: {
@@ -138,7 +148,7 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     position: 'absolute',
-    right: wp('5%'),
+    right: wp('2%'),
     bottom: hp('1%'),
     flexDirection: 'row',
     alignItems: 'center',
@@ -146,7 +156,7 @@ const styles = StyleSheet.create({
   iconWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: wp('2%'),
+    marginRight: wp('3%'),
   },
   iconText: {
     marginLeft: wp('1%'),

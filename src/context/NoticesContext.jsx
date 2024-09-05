@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import Camera from '../img/Camera.png';
+import profile_default from '../img/profile_default.png';
 
 export const NoticesContext = createContext();
 
@@ -7,7 +7,7 @@ export const NoticesProvider = ({ children }) => {
   const [notices, setNotices] = useState([
     {
       id: '1',
-      profilePicture: Camera,
+      profilePicture: profile_default,
       title: 'Fetch Title',
       content: 'Fetch Content',
       date: 'Fetch Date',
@@ -18,7 +18,7 @@ export const NoticesProvider = ({ children }) => {
     },
     {
       id: '2',
-      profilePicture: Camera,
+      profilePicture: profile_default,
       title: 'New Policy Update',
       content: 'Check the new policy update.',
       date: '7/29/19',
@@ -29,7 +29,7 @@ export const NoticesProvider = ({ children }) => {
     },
     {
       id: '3',
-      profilePicture: Camera,
+      profilePicture: profile_default,
       title: 'Holiday Announcement',
       content: 'We will have a holiday on Friday.',
       date: '7/29/19',
@@ -46,7 +46,7 @@ export const NoticesProvider = ({ children }) => {
       title: title,
       content: content,
       date: new Date().toLocaleDateString(),
-      profilePicture: profilePicture || Camera, // Temporary image URL // Use a default profile picture if not provided
+      profilePicture: profilePicture || profile_default, // Temporary image URL // Use a default profile picture if not provided
       userId,
       likes: 0,
       comments: 0,

@@ -31,6 +31,7 @@ import SettingCoupon from './src/screen/SettingStackScreens/SettingCoupon';
 
 import StudyMain from './src/screen/StudyStackScreens/StudyMain';
 import StudyTest from './src/screen/StudyStackScreens/StudyTest';
+import StudyFolder from './src/screen/StudyStackScreens/StudyFolder';
 
 import UploadMain from './src/screen/UploadStackScreens/UploadMain';
 import UploadChecking from './src/screen/UploadStackScreens/UploadChecking';
@@ -119,6 +120,20 @@ const StudyStackScreen = () => {
           options={({ navigation }) => ({
             headerTitleAlign: 'center',
             title: 'Review',
+            headerTitleStyle: {
+              fontSize: hp('3%'), // Adjust the size as needed, using a responsive unit
+            },
+            headerStyle: {
+              height: hp('10%'), // Adjust the height as needed, using a responsive unit
+            },
+          })}
+        />
+        <StudyStack.Screen 
+          name="StudyFolder" 
+          component={StudyFolder}
+          options={({ navigation }) => ({
+            headerTitleAlign: 'center',
+            title: 'Bookmark',
             headerTitleStyle: {
               fontSize: hp('3%'), // Adjust the size as needed, using a responsive unit
             },
