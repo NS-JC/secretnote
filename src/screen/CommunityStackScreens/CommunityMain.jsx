@@ -4,9 +4,9 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NoticesContext } from '../../context/NoticesContext';
 
+
 const CommunityMain = ({ navigation }) => {
-  const { notices } = useContext(NoticesContext);
-  const [selectedBoard, setSelectedBoard] = useState('인기글 게시판');
+  const { notices, selectedBoard, setSelectedBoard } = useContext(NoticesContext);
 
   // Filter notices based on the selected board (to be implemented with backend)
   const filteredNotices = notices.filter(notice => notice.board === selectedBoard);
@@ -52,7 +52,7 @@ const CommunityMain = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.boardSelector}>
-        {['인기글 게시판', '자유 게시판', '공부 게시판'].map(board => (
+        {['자유 게시판', '공부 게시판'].map(board => (
           <TouchableOpacity
             key={board}
             style={[
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   boardButton: {
-    width: wp('33%'), 
+    width: wp('50%'), 
     height: wp('10%'),
     justifyContent: 'center', 
     alignItems: 'center',

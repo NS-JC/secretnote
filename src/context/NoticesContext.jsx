@@ -14,7 +14,7 @@ export const NoticesProvider = ({ children }) => {
       userId: '아이디1',
       likes: 1,
       comments: 1,
-      board: '인기글 게시판',
+      board: '자유 게시판',
     },
     {
       id: '2',
@@ -40,6 +40,8 @@ export const NoticesProvider = ({ children }) => {
     },
   ]);
 
+  const [selectedBoard, setSelectedBoard] = useState('자유 게시판'); // Added selectedBoard state
+
   const addNotice = (title, content, profilePicture, userId, board) => {
     const newNotice = {
       id: (notices.length + 1).toString(),
@@ -47,16 +49,16 @@ export const NoticesProvider = ({ children }) => {
       content: content,
       date: new Date().toLocaleDateString(),
       profilePicture: profilePicture || profile_default, // Temporary image URL // Use a default profile picture if not provided
-      userId,
+      userId: userId || 'Anonymous',
       likes: 0,
       comments: 0,
-      board, // Assign to the selected board
+      board: board,
     };
-    setNotices([newNotice, ...notices]);
+    setNotices(prevNotices => [newNotice, ...prevNotices]);
   };
 
   return (
-    <NoticesContext.Provider value={{ notices, addNotice }}>
+    <NoticesContext.Provider value={{ notices, addNotice, selectedBoard, setSelectedBoard }}>
       {children}
     </NoticesContext.Provider>
   );

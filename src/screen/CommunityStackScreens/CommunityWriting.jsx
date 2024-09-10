@@ -9,13 +9,14 @@ const CommunityWriting = ({ navigation }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const titleInputRef = useRef(null); // Create a ref for the title input
-  const { addNotice } = useContext(NoticesContext);
+  const { addNotice, selectedBoard } = useContext(NoticesContext);
   const [isFirstMount, setIsFirstMount] = useState(true);
 
   const handlePost = () => {
     if (title.trim() && content.trim()) {
-      addNotice(title, content);
-      Alert.alert('Post Success', 'Your post has been submitted!');
+      // Backend integration would go here
+      addNotice(title, content, null, 'UserId', selectedBoard);  // Save with selected board
+      Alert.alert('Post Success', `Your post has been added to ${selectedBoard}!`);
       navigation.goBack();
     } else {
       Alert.alert('Please fill in both the title and content.');
