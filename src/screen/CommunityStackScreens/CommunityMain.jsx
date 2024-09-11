@@ -18,7 +18,9 @@ const CommunityMain = ({ navigation }) => {
         title: item.title, 
         content: item.content, 
         date: item.date,
-        userProfilePicture: item.userProfilePicture, 
+        userId: item.userId, 
+        likes: item.likes,
+        userProfilePicture: item.profilePicture 
       })}
     >
       <View style={styles.profileContainer}>

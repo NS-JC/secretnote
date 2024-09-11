@@ -6,7 +6,19 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import profile_default from '../../img/profile_default.png'
 
 const CommunityComment = ({ route, navigation }) => {
-  const { title, content, date } = route.params;
+  const { title, content, date, likes: initialLikes } = route.params;
+  const [likes, setLikes] = useState(initialLikes);
+  const [userLiked, setUserLiked] = useState(false);
+
+  const toggleLike = () => {
+    if (userLiked) {
+      setLikes(likes - 1);
+    } else {
+      setLikes(likes + 1);
+    }
+    setUserLiked(!userLiked);
+  };
+
   const [comments, setComments] = useState([
     { id: '1', profilePicture: profile_default, userId: 'User1', commentContent: 'This is a comment', date: '9/24/19' },
     { id: '2', profilePicture: profile_default, userId: 'User2', commentContent: 'Another comment', date: '9/24/19' },
@@ -32,6 +44,13 @@ const CommunityComment = ({ route, navigation }) => {
     <View style={styles.noticeContentContainer}>
       <Text style={styles.noticeTitle}>{title}</Text>
       <Text style={styles.noticeContent}>{content}</Text>
+  
+      <View style={styles.likeContainer}>
+        <TouchableOpacity onPress={toggleLike} style={styles.likeButton}>
+          <Icon name={userLiked ? 'heart' : 'heart-o'} size={wp('6%')} color={userLiked ? 'red' : '#333'} />
+        </TouchableOpacity>
+        <Text style={styles.likeText}>{likes}</Text>
+      </View>
     </View>
   );
 
@@ -67,6 +86,7 @@ const CommunityComment = ({ route, navigation }) => {
       showTabBar();
     };
   }, [navigation]);
+
 
   return (
     <View style={styles.container}>
@@ -171,6 +191,21 @@ const styles = StyleSheet.create({
     marginRight: wp('5%'),
     paddingVertical: hp('1%'),
     borderRadius: 5,
+  },
+  likeContainer: {
+    flexDirection: 'row', 
+    alignItems: 'center',  
+    justifyContent: 'flex-end',  
+    marginTop: hp('1%'), 
+    right: wp('3%'), 
+  },
+  likeButton: {
+    padding: wp('1%'), 
+  },
+  likeText: {
+    marginLeft: wp('2%'),
+    fontSize: wp('4%'),
+    color: '#333',
   },
 });
 
