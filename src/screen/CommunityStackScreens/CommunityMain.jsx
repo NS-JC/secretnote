@@ -20,6 +20,7 @@ const CommunityMain = ({ navigation }) => {
         date: item.date,
         userId: item.userId, 
         likes: item.likes,
+        comments: item.comments,
         userProfilePicture: item.profilePicture 
       })}
     >

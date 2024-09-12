@@ -33,10 +33,54 @@ const CommunityComment = ({ route, navigation }) => {
         userId: 'CurrentUser',
         commentContent: newComment,
         date: new Date().toLocaleDateString(),
-        userProfilePicture: profile_default, // Assign the profile picture for the new comment
+        profilePicture: profile_default,
+        commentLikes: 0,
+        userLiked: false,
       };
       setComments([...comments, newCommentData]);
       setNewComment('');
+    }
+  };
+
+  const toggleCommentLike = async (commentId) => {
+    setComments((prevComments) =>
+      prevComments.map((comment) => {
+        if (comment.id === commentId) {
+          const updatedLikes = comment.userLiked ? comment.commentLikes - 1 : comment.commentLikes + 1;
+          const updatedUserLiked = !comment.userLiked;
+          
+          // Call API to update the comment like status in the server
+          updateCommentLikeOnServer(commentId, updatedLikes, updatedUserLiked);
+
+          return {
+            ...comment,
+            commentLikes: updatedLikes,
+            userLiked: updatedUserLiked,
+          };
+        }
+        return comment;
+      })
+    );
+  };
+
+  const updateCommentLikeOnServer = async (commentId, updatedLikes, updatedUserLiked) => {
+    // Make your API call to save updated likes count and user interaction to the server
+    try {
+      const response = await fetch('https://your-api-url.com/comments/like', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          commentId,
+          likes: updatedLikes,
+          userLiked: updatedUserLiked,
+        }),
+      });
+      const data = await response.json();
+      console.log('Server response:', data);
+    } catch (error) {
+      console.error('Error updating likes:', error);
     }
   };
 
@@ -61,7 +105,19 @@ const CommunityComment = ({ route, navigation }) => {
         <Text style={styles.commentUser}>{item.userId}</Text>
         <Text style={styles.commentContent}>{item.commentContent}</Text>
       </View>
-      <Text style={styles.commentDate}>{item.date}</Text>
+
+      {/* Comment like functionality */}
+      <View style={styles.commentLikeContainer}>
+        <Text style={styles.commentDate}>{item.date}</Text>
+        <TouchableOpacity onPress={() => toggleCommentLike(item.id)} style={styles.likeButton}>
+          <Icon
+            name={item.userLiked ? 'heart' : 'heart-o'}
+            size={wp('5%')}
+            color={item.userLiked ? 'red' : '#333'}
+          />
+        </TouchableOpacity>
+      </View>
+      <Text style={styles.commentLikeText}>{item.commentLikes}</Text>
     </View>
   );
 
@@ -144,7 +200,7 @@ const styles = StyleSheet.create({
   commentItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: hp('2%'),
+    paddingVertical: hp('1%'),
     paddingHorizontal: hp('2%'),
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
@@ -204,6 +260,17 @@ const styles = StyleSheet.create({
   },
   likeText: {
     marginLeft: wp('2%'),
+    fontSize: wp('4%'),
+    color: '#333',
+  },
+  commentLikeContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: hp('0.5%'),
+  },
+  commentLikeText: {
+    marginTop: wp('8%'),
+    marginLeft: wp('1%'),
     fontSize: wp('4%'),
     color: '#333',
   },
