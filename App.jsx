@@ -57,7 +57,7 @@ const StoreStackScreen = () => {
         name="StoreStack"
         component={StoreMain}
         options={({ navigation }) => ({
-          headerShown: true,
+          headerShown: false,
           headerTitleAlign: 'center',
           title: 'Store', // Set the title for the header
           headerTitleStyle: {
