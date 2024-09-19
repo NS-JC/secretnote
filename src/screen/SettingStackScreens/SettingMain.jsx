@@ -55,34 +55,7 @@ const SettingMain = () => {
       </View>
 
       <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>COIN CENTER</Text>
-      </View>
-
-      <TouchableOpacity 
-        style={styles.option} 
-        onPress={() => navigation.navigate('CoinCenter')}
-      >
-        <View style={styles.optionContent}>
-          <FontAwesome5 name="store" size={wp('6%')} color="#FFC107" />
-          <Text style={styles.optionTitle}>코인 충전소</Text>
-          <Text style={styles.optionSubtitle}>보유코인: {profileData.currentCoin} 개</Text>
-        </View>
-        <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
-      </TouchableOpacity>
-
-      <TouchableOpacity 
-        style={styles.option} 
-        onPress={() => navigation.navigate('Coupon')}
-      >
-        <View style={styles.optionContent}>
-          <Icon name="ticket" size={wp('6%')} color="#E0E0E0" />
-          <Text style={styles.optionTitle}>쿠폰함</Text>
-        </View>
-        <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
-      </TouchableOpacity>
-
-      <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>COMMUNITY</Text>
+        <Text style={styles.sectionTitle}>INFORMATION</Text>
       </View>
 
       <TouchableOpacity 
@@ -109,11 +82,11 @@ const SettingMain = () => {
 
       <TouchableOpacity 
         style={styles.option} 
-        onPress={() => navigation.navigate('Invite')}
+        onPress={() => navigation.navigate('System')}
       >
         <View style={styles.optionContent}>
-          <Icon name="heart" size={wp('6%')} color="#E0E0E0" />
-          <Text style={styles.optionTitle}>초대하기</Text>
+          <Icon name="gear" size={wp('6%')} color="#E0E0E0" />
+          <Text style={styles.optionTitle}>설정</Text>
         </View>
         <Icon name="angle-right" size={wp('6%')} color="#B0B0B0" />
       </TouchableOpacity>
@@ -189,7 +162,7 @@ const styles = StyleSheet.create({
   adSection: {
     alignItems: 'center',
     justifyContent: 'center',
-    padding: hp('2%'),
+    padding: hp('4%'),
     backgroundColor: '#FFFFFF',
     marginVertical: hp('1%'),
   },
@@ -225,7 +198,7 @@ const styles = StyleSheet.create({
   },
   optionTitle: {
     fontSize: wp('4%'),
-    marginLeft: wp('2.5%'),
+    marginLeft: wp('4%'),
     color: '#333333',
   },
   optionSubtitle: {
@@ -238,7 +211,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: hp('2%'),
     backgroundColor: '#FFFFFF',
-    marginVertical: hp('1%'),
+    marginVertical: hp('2%'),
   },
   logoutText: {
     color: '#FF0000',

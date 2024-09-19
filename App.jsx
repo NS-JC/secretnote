@@ -20,14 +20,17 @@ import CommunityMain from './src/screen/CommunityStackScreens/CommunityMain';
 import CommunityWriting from './src/screen/CommunityStackScreens/CommunityWriting';
 import CommunityComment from './src/screen/CommunityStackScreens/CommunityComment';
 
-import SettingCoinCenter from './src/screen/SettingStackScreens/SettingCoinCenter';
-import SettingInvite from './src/screen/SettingStackScreens/SettingInvite';
 import SettingMain from './src/screen/SettingStackScreens/SettingMain';
+import SettingProfile from './src/screen/SettingStackScreens/SettingProfile';
 import SettingMyContents from './src/screen/SettingStackScreens/SettingMyContents';
 import SettingReadMyContents from './src/screen/SettingStackScreens/SettingReadMyContents';
-import SettingProfile from './src/screen/SettingStackScreens/SettingProfile';
+import SettingSystem from './src/screen/SettingStackScreens/SettingSystem';
 import SettingNotification from './src/screen/SettingStackScreens/SettingNotification';
-import SettingCoupon from './src/screen/SettingStackScreens/SettingCoupon';
+import SettingNotice from './src/screen/SettingStackScreens/SettingNotice';
+import SettingPaymentHistory from './src/screen/SettingStackScreens/SettingPaymentHistory';
+import SettingAppInfo from './src/screen/SettingStackScreens/SettingAppInfo';
+import SettingPrivacyPolicy from './src/screen/SettingStackScreens/SettingPrivacyPolicy';
+import SettingRefundPolicy from './src/screen/SettingStackScreens/SettingRefundPolicy';
 
 import StudyMain from './src/screen/StudyStackScreens/StudyMain';
 import StudyTest from './src/screen/StudyStackScreens/StudyTest';
@@ -213,12 +216,15 @@ const SettingStackScreen = () => {
           })} 
         />
         <SettingStack.Screen name="Profile" component={SettingProfile} />
-        <SettingStack.Screen name="CoinCenter" component={SettingCoinCenter} />
-        <SettingStack.Screen name="Coupon" component={SettingCoupon} />
         <SettingStack.Screen name="MyContents" component={SettingMyContents} />
         <SettingStack.Screen name="ReadMyContents" component={SettingReadMyContents} />
         <SettingStack.Screen name="Notification" component={SettingNotification} />
-        <SettingStack.Screen name="Invite" component={SettingInvite} />
+        <SettingStack.Screen name="System" component={SettingSystem} />
+        <SettingStack.Screen name="Notice" component={SettingNotice} />
+        <SettingStack.Screen name="PaymentHistory" component={SettingPaymentHistory} />
+        <SettingStack.Screen name="AppInfo" component={SettingAppInfo} />
+        <SettingStack.Screen name="PrivacyPolicy" component={SettingPrivacyPolicy} />
+        <SettingStack.Screen name="RefundPolicy" component={SettingRefundPolicy} />
       </Stack.Navigator>
     </NoticesProvider>
   );

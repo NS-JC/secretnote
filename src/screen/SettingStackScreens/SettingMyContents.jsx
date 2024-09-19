@@ -5,7 +5,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { NoticesContext } from '../../context/NoticesContext';
 
 const CommunityMain = ({ navigation }) => {
-  const { notices } = useContext(NoticesContext);
+  const { notices, selectedBoard, setSelectedBoard } = useContext(NoticesContext);
+
+  // Filter notices based on the selected board (to be implemented with backend)
+  const filteredNotices = notices.filter(notice => notice.board === selectedBoard);
 
   const renderNotice = ({ item }) => (
     <TouchableOpacity 
@@ -14,16 +17,37 @@ const CommunityMain = ({ navigation }) => {
         title: item.title, 
         content: item.content, 
         date: item.date,
-        userProfilePicture: item.userProfilePicture, // Pass the profile picture to the Comment screen 
+        userId: item.userId, 
+        likes: item.likes,
+        comments: item.comments,
+        userProfilePicture: item.profilePicture 
       })}
     >
-      <Image source={item.profilePicture} style={styles.profilePicture} />
-
-      <View style={styles.textContainer}>
-        <Text style={styles.noticeTitle}>{item.title}</Text>
-        <Text style={styles.noticeContent}>{item.content}</Text>
+      <View style={styles.profileContainer}>
+        <Image source={item.profilePicture} style={styles.profilePicture} />
+        <Text style={styles.userId}>{item.userId}</Text>
       </View>
-      <Text style={styles.noticeDate}>{item.date}</Text>
+      <View style={styles.textContainer}>
+        <Text style={styles.noticeTitle} numberOfLines={1} ellipsizeMode="tail">
+          {item.title}
+        </Text>
+        <Text style={styles.noticeContent} numberOfLines={1} ellipsizeMode="tail">
+          {item.content}
+        </Text>
+      </View>
+      <Text style={styles.noticeDate} numberOfLines={1} ellipsizeMode="tail">
+        {item.date}
+      </Text>
+      <View style={styles.iconContainer}>
+        <View style={styles.iconWrapper}>
+          <Icon name="heart-o" size={wp('4%')} color="#333" />
+          <Text style={styles.iconText}>{item.likes}</Text>
+        </View>
+        <View style={styles.iconWrapper}>
+          <Icon name="comment-o" size={wp('4%')} color="#333" />
+          <Text style={styles.iconText}>{item.comments}</Text>
+        </View>
+      </View>
     </TouchableOpacity>
   );
 
@@ -41,40 +65,73 @@ const CommunityMain = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: wp('5%'),
     backgroundColor: '#f8f9fa',
   },
   noticeItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: hp('2%'),
-    borderBottomWidth: 1,
+    marginVertical: 2,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    paddingVertical: hp('1.5%'),
+    borderTopWidth: 0.1,
+    borderTopolor: '#ccc',
+    borderBottomWidth: 0.5,
     borderBottomColor: '#ccc',
+    backgroundColor: '#fff',
+  },
+  profileContainer: {
+    paddingLeft: wp('4%'),
+    flexDirection: 'row',
+    alignItems: 'center', // Ensures the profile picture and user ID are vertically aligned
+    marginBottom: hp('1%'),
   },
   profilePicture: {
-    width: wp('10%'),
-    height: wp('10%'),
-    borderRadius: wp('5%'),
-    marginRight: wp('5%'),
+    width: wp('8%'),
+    height: wp('8%'),
+    borderRadius: wp('4%'),
+    marginRight: wp('3%'),
   },
   textContainer: {
     flex: 1,
-    paddingRight: wp('5%'),
+    paddingLeft: wp('5%'),
+  },
+  userId: {
+    fontSize: wp('4%'),
+    color: '#333',
   },
   noticeTitle: {
     fontSize: wp('4.5%'),
     fontWeight: 'bold',
     color: '#333',
+    marginTop: hp('0.5%'),
+    marginBottom: hp('0.5%'),
   },
   noticeContent: {
     fontSize: wp('4%'),
     color: '#555',
-    marginTop: hp('0.5%'),
   },
   noticeDate: {
     fontSize: wp('4%'),
     color: '#999',
+    position: 'absolute',
+    right: wp('5%'),
+    top: hp('2%'),
+  },
+  iconContainer: {
+    position: 'absolute',
+    right: wp('2%'),
+    bottom: hp('1%'),
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  iconWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: wp('3%'),
+  },
+  iconText: {
+    marginLeft: wp('1%'),
+    fontSize: wp('4%'),
+    color: '#333',
   },
 });
 

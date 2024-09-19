@@ -3,13 +3,25 @@ import { View, Text, TouchableOpacity, FlatList, StyleSheet, TextInput, Image , 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
-import GoogleIcon from '../../img/GoogleIcon.png'
+import profile_default from '../../img/profile_default.png'
 
 const CommunityComment = ({ route, navigation }) => {
-  const { title, content, date } = route.params;
+  const { title, content, date, likes: initialLikes } = route.params;
+  const [likes, setLikes] = useState(initialLikes);
+  const [userLiked, setUserLiked] = useState(false);
+
+  const toggleLike = () => {
+    if (userLiked) {
+      setLikes(likes - 1);
+    } else {
+      setLikes(likes + 1);
+    }
+    setUserLiked(!userLiked);
+  };
+
   const [comments, setComments] = useState([
-    { id: '1', profilePicture: GoogleIcon, userId: 'User1', commentContent: 'This is a comment', date: '9/24/19' },
-    { id: '2', profilePicture: GoogleIcon, userId: 'User2', commentContent: 'Another comment', date: '9/24/19' },
+    { id: '1', profilePicture: profile_default, userId: 'User1', commentContent: 'This is a comment', date: '9/24/19' },
+    { id: '2', profilePicture: profile_default, userId: 'User2', commentContent: 'Another comment', date: '9/24/19' },
   ]);
 
   const [newComment, setNewComment] = useState('');
@@ -21,12 +33,70 @@ const CommunityComment = ({ route, navigation }) => {
         userId: 'CurrentUser',
         commentContent: newComment,
         date: new Date().toLocaleDateString(),
-        userProfilePicture, // Assign the profile picture for the new comment
+        profilePicture: profile_default,
+        commentLikes: 0,
+        userLiked: false,
       };
       setComments([...comments, newCommentData]);
       setNewComment('');
     }
   };
+
+  const toggleCommentLike = async (commentId) => {
+    setComments((prevComments) =>
+      prevComments.map((comment) => {
+        if (comment.id === commentId) {
+          const updatedLikes = comment.userLiked ? comment.commentLikes - 1 : comment.commentLikes + 1;
+          const updatedUserLiked = !comment.userLiked;
+          
+          // Call API to update the comment like status in the server
+          updateCommentLikeOnServer(commentId, updatedLikes, updatedUserLiked);
+
+          return {
+            ...comment,
+            commentLikes: updatedLikes,
+            userLiked: updatedUserLiked,
+          };
+        }
+        return comment;
+      })
+    );
+  };
+
+  const updateCommentLikeOnServer = async (commentId, updatedLikes, updatedUserLiked) => {
+    // Make your API call to save updated likes count and user interaction to the server
+    try {
+      const response = await fetch('https://your-api-url.com/comments/like', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          commentId,
+          likes: updatedLikes,
+          userLiked: updatedUserLiked,
+        }),
+      });
+      const data = await response.json();
+      console.log('Server response:', data);
+    } catch (error) {
+      console.error('Error updating likes:', error);
+    }
+  };
+
+  const renderHeader = () => (
+    <View style={styles.noticeContentContainer}>
+      <Text style={styles.noticeTitle}>{title}</Text>
+      <Text style={styles.noticeContent}>{content}</Text>
+  
+      <View style={styles.likeContainer}>
+        <TouchableOpacity onPress={toggleLike} style={styles.likeButton}>
+          <Icon name={userLiked ? 'heart' : 'heart-o'} size={wp('6%')} color={userLiked ? 'red' : '#333'} />
+        </TouchableOpacity>
+        <Text style={styles.likeText}>{likes}</Text>
+      </View>
+    </View>
+  );
 
   const renderComment = ({ item }) => (
     <View style={styles.commentItem}>
@@ -35,7 +105,19 @@ const CommunityComment = ({ route, navigation }) => {
         <Text style={styles.commentUser}>{item.userId}</Text>
         <Text style={styles.commentContent}>{item.commentContent}</Text>
       </View>
-      <Text style={styles.commentDate}>{item.date}</Text>
+
+      {/* Comment like functionality */}
+      <View style={styles.commentLikeContainer}>
+        <Text style={styles.commentDate}>{item.date}</Text>
+        <TouchableOpacity onPress={() => toggleCommentLike(item.id)} style={styles.likeButton}>
+          <Icon
+            name={item.userLiked ? 'heart' : 'heart-o'}
+            size={wp('5%')}
+            color={item.userLiked ? 'red' : '#333'}
+          />
+        </TouchableOpacity>
+      </View>
+      <Text style={styles.commentLikeText}>{item.commentLikes}</Text>
     </View>
   );
 
@@ -61,25 +143,16 @@ const CommunityComment = ({ route, navigation }) => {
     };
   }, [navigation]);
 
+
   return (
     <View style={styles.container}>
-
-      {/* Notice Content */}
-      <View style={styles.noticeContentContainer}>
-        <Text style={styles.noticeTitle}>{title}</Text>
-        <Text style={styles.noticeContent}>{content}</Text>
-      </View>
-
-      {/* Comments */}
-      
       <FlatList
         data={comments}
+        ListHeaderComponent={renderHeader}
         renderItem={renderComment}
-        keyExtractor={item => item.id}
-        style={styles.commentList}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.listContentContainer}
       />
-
-      {/* Comment Input */}
       <View style={styles.commentInputContainer}>
         <TextInput
           style={styles.commentInput}
@@ -88,11 +161,7 @@ const CommunityComment = ({ route, navigation }) => {
           placeholder="댓글을 입력하세요."
         />
         <TouchableOpacity onPress={addComment} style={styles.addCommentButton}>
-          <FontAwesome6 
-            name="circle-arrow-up" 
-            size={wp('8%')}  // Adjust the size as needed
-            color="#007AFF"  // Use white color for the icon
-          />
+          <FontAwesome6 name="circle-arrow-up" size={wp('8%')} color="#007AFF" />
         </TouchableOpacity>
       </View>
     </View>
@@ -125,27 +194,21 @@ const styles = StyleSheet.create({
     color: '#555',
     marginTop: hp('1%'),
   },
-  commentList: {
-    flex: 1,
-    paddingHorizontal: wp('5%'),
+  listContentContainer: {
+    paddingBottom: hp('10%'),
   },
   commentItem: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: hp('2%'),
+    paddingVertical: hp('1%'),
+    paddingHorizontal: hp('2%'),
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
-  commentProfilePicture: {
-    width: wp('8%'),
-    height: wp('8%'),
-    borderRadius: wp('4%'), 
-    marginRight: wp('3%'),
-  },
   commentTextContainer: {
     flex: 1,
-    paddingRight: wp('5%'),
+    flexShrink: 1, // Allow text to shrink to avoid overflowing
+    paddingRight: wp('2%'), // Add padding to the right side
   },
   commentUser: {
     fontSize: wp('4%'),
@@ -156,10 +219,12 @@ const styles = StyleSheet.create({
     fontSize: wp('4%'),
     color: '#555',
     marginTop: hp('0.5%'),
+    flexWrap: 'wrap', // Ensure text wraps within its container
   },
   commentDate: {
     fontSize: wp('4%'),
     color: '#999',
+    marginLeft: wp('2%'), // Add margin to the left to avoid overlap,
   },
   commentInputContainer: {
     flexDirection: 'row',
@@ -182,6 +247,32 @@ const styles = StyleSheet.create({
     marginRight: wp('5%'),
     paddingVertical: hp('1%'),
     borderRadius: 5,
+  },
+  likeContainer: {
+    flexDirection: 'row', 
+    alignItems: 'center',  
+    justifyContent: 'flex-end',  
+    marginTop: hp('1%'), 
+    right: wp('3%'), 
+  },
+  likeButton: {
+    padding: wp('1%'), 
+  },
+  likeText: {
+    marginLeft: wp('2%'),
+    fontSize: wp('4%'),
+    color: '#333',
+  },
+  commentLikeContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: hp('0.5%'),
+  },
+  commentLikeText: {
+    marginTop: wp('8%'),
+    marginLeft: wp('1%'),
+    fontSize: wp('4%'),
+    color: '#333',
   },
 });
 
