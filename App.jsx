@@ -44,6 +44,9 @@ import LoginScreen from './src/screen/LoginScreen';
 import { NoticesProvider } from './src/context/NoticesContext';
 import { StudyProvider } from './src/context/StudyContext';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from 'react';
+import OnboardingScreen from './src/screen/OnboardingScreen';
 
 const Stack = createStackNavigator();
 const CommunityStack = createStackNavigator();
@@ -295,34 +298,66 @@ const Auth = () => {
 
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Auth">
-        {/* if you want to use splash screen then activate below and add splach screen
-        <Stack.Screen
-          name="SplashScreen"
-          component={SplashScreen}
-          options={{headerShown: false}}
-        /> */}
-        {/* Auth Navigator: Include Login and Signup */}
-        <Stack.Screen
-          name="Auth"
-          component={Auth}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="MainTab"
-          // i have no idea what this is below
-          // options={({route}) => ({
-          //   headerTitle: getHeaderTitle(route),
-          // })}
-          component={MainTabScreen}
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator>
-      <FlashMessage position="bottom" />
-    </NavigationContainer>
-  );
+
+  const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+
+  useEffect(() => {
+    const checkFirstLaunch = async () => {
+      const hasLaunched = await AsyncStorage.getItem('hasLaunched');
+      if (hasLaunched === null) {
+        await AsyncStorage.setItem('hasLaunched', 'true');
+        setIsFirstLaunch(true);
+      } else {
+        setIsFirstLaunch(false);
+      }
+    };
+    checkFirstLaunch();
+  }, []);
+
+  if (isFirstLaunch === null) {
+    return null; // Add a loading screen here if needed
+  } else if (isFirstLaunch === true) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Auth" component={Auth} options={{headerShown: false}} />
+          <Stack.Screen name="MainTab" component={MainTabScreen} options={{ headerShown: false }} />
+        </Stack.Navigator>
+        <FlashMessage position="bottom" />
+      </NavigationContainer>
+    );
+  } else {
+
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Auth">
+          {/* if you want to use splash screen then activate below and add splach screen
+          <Stack.Screen
+            name="SplashScreen"
+            component={SplashScreen}
+            options={{headerShown: false}}
+          /> */}
+          {/* Auth Navigator: Include Login and Signup */}
+          <Stack.Screen
+            name="Auth"
+            component={Auth}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="MainTab"
+            // i have no idea what this is below
+            // options={({route}) => ({
+            //   headerTitle: getHeaderTitle(route),
+            // })}
+            component={MainTabScreen}
+            options={{headerShown: false}}
+          />
+        </Stack.Navigator>
+        <FlashMessage position="bottom" />
+      </NavigationContainer>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
