@@ -15,20 +15,20 @@ const OnboardingScreen = ({ navigation }) => {
         {
           backgroundColor: '#fff',
           image: <Image source={require('../img/onboarding1.png')} style={{ width: wp('80%'), height: hp('40%') }} />,
-          title: <Text style={{ fontSize: hp('3%'), textAlign: 'center' }}>Welcome to Our App!</Text>,
-          subtitle: <Text style={{ fontSize: hp('2%'), textAlign: 'center' }}>Explanation text 1</Text>,
+          title: <Text style={{ fontSize: hp('3%'), textAlign: 'center' }}>SCAN</Text>,
+          subtitle: <Text style={{ fontSize: hp('2%'), textAlign: 'center' }}>문제를 사진찍으면</Text>,
         },
         {
           backgroundColor: '#fff',
           image: <Image source={require('../img/onboarding2.png')} style={{ width: wp('80%'), height: hp('40%') }} />,
           title: <Text style={{ fontSize: hp('3%'), textAlign: 'center' }}>Learn More</Text>,
-          subtitle: <Text style={{ fontSize: hp('2%'), textAlign: 'center' }}>Explanation text 2</Text>,
+          subtitle: <Text style={{ fontSize: hp('2%'), textAlign: 'center' }}>정답 + 해설 + 비슷한 문제를 AI가 만들어줘요!</Text>,
         },
         {
           backgroundColor: '#fff',
           image: <Image source={require('../img/onboarding3.png')} style={{ width: wp('80%'), height: hp('40%') }} />,
           title: <Text style={{ fontSize: hp('3%'), textAlign: 'center' }}>Get Started!</Text>,
-          subtitle: <Text style={{ fontSize: hp('2%'), textAlign: 'center' }}>Explanation text 3</Text>,
+          subtitle: <Text style={{ fontSize: hp('2%'), textAlign: 'center' }}>지금바로 성적을 향상시켜 보세요!</Text>,
         },
       ]}
     />
